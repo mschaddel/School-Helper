@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class Name:" />
+
+        <EditText
+            android:id="etClassName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter the class name here" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Professor&apos;s Name:" />
+
+        <EditText
+            android:id="etProfName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter the professor&apos;s name here" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location" />
+
+        <EditText
+            android:id="etLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter the class location here" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Days" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ToggleButton
+                android:id="tbM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:textOff="M"
+                android:textOn="M" />
+
+            <ToggleButton
+                android:id="tbT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="T"
+                android:textOff="T"
+                android:textOn="T" />
+
+            <ToggleButton
+                android:id="tbW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="W"
+                android:textOff="W"
+                android:textOn="W" />
+
+            <ToggleButton
+                android:id="tbR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R"
+                android:textOff="R"
+                android:textOn="R" />
+
+            <ToggleButton
+                android:id="tbF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:textOff="F"
+                android:textOn="F" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnChangeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Time" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Time (H:M): " />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Additional Notes" />
+
+        <EditText
+            android:id="etNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter any addtional notes here"
+            android:lines="3" />
+    </LinearLayout>
+
+    <Button
+        android:id="btnAddDoc"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Add Document" />
+
+    <Button
+        android:id="btnAddClass"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Add Class" />
+
+</RelativeLayout>
