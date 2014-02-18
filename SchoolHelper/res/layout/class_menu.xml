@@ -4,84 +4,84 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="1"
+        android:id="@+id/a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ClassName:" />
 
     <TextView
-        android:id="tvClassName"
+        android:id="@+id/tvClassName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="1"
+        android:layout_toRightOf="@+id/a"
         android:text="" />
 
     <TextView
-        android:id="2"
+        android:id="@+id/b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="1"
+        android:layout_below="@+id/a"
         android:text="ProfName:" />
 
     <TextView
-        android:id="tvProfName"
+        android:id="@+id/tvProfName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="2"
+        android:layout_toRightOf="@+id/b"
         android:text=" " />
 
     <TextView
-        android:id="3"
+        android:id="@+id/c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="2"
+        android:layout_below="@+id/b"
         android:text="ClassLoc:" />
 
     <TextView
-        android:id="tvClassLoc"
+        android:id="@+id/tvClassLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="3"
+        android:layout_toRightOf="@+id/c"
         android:text=" " />
 
     <TextView
-        android:id="4"
+        android:id="@+id/d"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="3"
+        android:layout_below="@+id/c"
         android:text="ClassTime:" />
 
     <TextView
-        android:id="tvClassTime"
+        android:id="@+id/tvClassTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="4"
+        android:layout_toRightOf="@+id/d"
         android:text=" " />
 
     <Button
-        android:id="btnAddEvent"
+        android:id="@+id/btnAddEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="4"
+        android:layout_below="@+id/d"
         android:text="Add Event" />
 
     <Button
-        android:id="btnDelEvent"
+        android:id="@+id/btnDelEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="4"
+        android:layout_below="@+id/d"
         android:text="Delete Event" />
 
     <ListView
-        android:id="lvEvents"
+        android:id="@+id/lvEvents"
         android:layout_width="wrap_content"
         android:layout_height="330dp"
-        android:layout_below="btnAddEvent" >
+        android:layout_below="@+id/btnAddEvent" >
     </ListView>
 
     <Button
-        android:id="btnAddDoc"
+        android:id="@+id/btnAddDoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

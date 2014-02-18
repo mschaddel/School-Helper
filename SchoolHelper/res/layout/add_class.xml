@@ -14,7 +14,7 @@
             android:text="Class Name:" />
 
         <EditText
-            android:id="etClassName"
+            android:id="@+id/etClassName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Enter the class name here" />
@@ -25,7 +25,7 @@
             android:text="Professor&apos;s Name:" />
 
         <EditText
-            android:id="etProfName"
+            android:id="@+id/etProfName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Enter the professor&apos;s name here" />
@@ -36,7 +36,7 @@
             android:text="Location" />
 
         <EditText
-            android:id="etLocation"
+            android:id="@+id/etLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Enter the class location here" />
@@ -52,7 +52,7 @@
             android:orientation="horizontal" >
 
             <ToggleButton
-                android:id="tbM"
+                android:id="@+id/tbM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"
@@ -60,7 +60,7 @@
                 android:textOn="M" />
 
             <ToggleButton
-                android:id="tbT"
+                android:id="@+id/tbT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="T"
@@ -68,7 +68,7 @@
                 android:textOn="T" />
 
             <ToggleButton
-                android:id="tbW"
+                android:id="@+id/tbW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="W"
@@ -76,7 +76,7 @@
                 android:textOn="W" />
 
             <ToggleButton
-                android:id="tbR"
+                android:id="@+id/tbR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R"
@@ -84,7 +84,7 @@
                 android:textOn="R" />
 
             <ToggleButton
-                android:id="tbF"
+                android:id="@+id/tbF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F"
@@ -123,7 +123,7 @@
             android:text="Additional Notes" />
 
         <EditText
-            android:id="etNotes"
+            android:id="@+id/etNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Enter any addtional notes here"
@@ -131,7 +131,7 @@
     </LinearLayout>
 
     <Button
-        android:id="btnAddDoc"
+        android:id="@+id/btnAddDoc"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -139,7 +139,7 @@
         android:text="Add Document" />
 
     <Button
-        android:id="btnAddClass"
+        android:id="@+id/btnAddClass"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

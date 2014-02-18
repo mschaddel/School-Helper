@@ -5,13 +5,13 @@
     android:orientation="vertical" >
 
     <CalendarView
-        android:id="cvCalendar"
+        android:id="@+id/cvCalendar"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:showWeekNumber="false" />
 
     <ListView
-        android:id="lvCalendar"
+        android:id="@+id/lvCalendar"
         android:layout_width="match_parent"
         android:layout_height="200dp" >
     </ListView>

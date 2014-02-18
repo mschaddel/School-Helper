@@ -9,7 +9,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="tvClasses"
+            android:id="@+id/tvClasses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -19,7 +19,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="lvClasses"
+        android:id="@+id/lvClasses"
         android:layout_width="wrap_content"
         android:layout_height="350dp" >
     </ListView>
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="btnAddClass"
+            android:id="@+id/btnAddClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
             android:text="Add Class" />
         
         <Button
-            android:id="btnDeleteClass"
+            android:id="@+id/btnDeleteClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="tvSettings"
+        android:id="@+id/tvSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -14,28 +14,28 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="btnNotifications"
+        android:id="@+id/btnNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="tvSettings"
+        android:layout_below="@+id/tvSettings"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:text="Notifications" />
 
     <Button
-        android:id="btnChangeMode"
+        android:id="@+id/btnChangeMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="btnNotifications"
+        android:layout_below="@+id/btnNotifications"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:text="Change Mode" />
 
     <Button
-        android:id="btnChangeProfile"
+        android:id="@+id/btnChangeProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="btnChangeMode"
+        android:layout_below="@+id/btnChangeMode"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
         android:text="Change Profile" />
