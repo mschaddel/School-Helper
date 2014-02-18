@@ -1,90 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="1"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ClassName:" />
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="tvClassName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="1"
-        android:text="" />
+        <TextView
+            android:id="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ClassName:" />
 
-    <TextView
-        android:id="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="1"
-        android:text="ProfName:" />
+        <TextView
+            android:id="tvClassName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="1"
+            android:text="" />
 
-    <TextView
-        android:id="tvProfName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="2"
-        android:text=" " />
+        <TextView
+            android:id="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="1"
+            android:text="ProfName:" />
 
-    <TextView
-        android:id="3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="2"
-        android:text="ClassLoc:" />
+        <TextView
+            android:id="tvProfName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="2"
+            android:text=" " />
 
-    <TextView
-        android:id="tvClassLoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="3"
-        android:text=" " />
+        <TextView
+            android:id="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="2"
+            android:text="ClassLoc:" />
 
-    <TextView
-        android:id="4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="3"
-        android:text="ClassTime:" />
+        <TextView
+            android:id="tvClassLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="3"
+            android:text=" " />
 
-    <TextView
-        android:id="tvClassTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="4"
-        android:text=" " />
+        <TextView
+            android:id="4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="3"
+            android:text="ClassTime:" />
 
-    <Button
-        android:id="btnAddEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="4"
-        android:text="Add Event" />
+        <TextView
+            android:id="tvClassTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="4"
+            android:text=" " />
 
-    <Button
-        android:id="btnDelEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="4"
-        android:text="Delete Event" />
+        <Button
+            android:id="btnAddEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="4"
+            android:text="Add Event" />
+
+        <Button
+            android:id="btnDelEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="4"
+            android:text="Delete Event" />
+    </RelativeLayout>
 
     <ListView
         android:id="lvEvents"
         android:layout_width="wrap_content"
-        android:layout_height="330dp"
-        android:layout_below="btnAddEvent" >
+        android:layout_height="300dp" >
     </ListView>
 
-    <Button
-        android:id="btnAddDoc"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Add Document" />
+        android:layout_height="wrap_content" >
 
-</RelativeLayout>
+        <Button
+            android:id="btnAddDoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Add Document" />
+
+        <Button
+            android:id="btnDeleteClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Delete Class" />
+    </RelativeLayout>
+
+</LinearLayout>
