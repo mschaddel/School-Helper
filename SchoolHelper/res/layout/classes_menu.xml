@@ -36,13 +36,6 @@
             android:layout_alignParentTop="true"
             android:text="Add Class" />
         
-        <Button
-            android:id="@+id/btnDeleteClass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="Delete Class" />
 
     </RelativeLayout>
 
