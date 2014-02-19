@@ -11,13 +11,13 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
-public class ClassesMenuFrag extends Fragment {
+public class MainActivityFrag extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		return inflater.inflate(R.layout.classes_menu, container, false);
+		return inflater.inflate(R.layout.main_activity_frag, container, false);
 	}
 
 	public void onStart() {
@@ -26,16 +26,26 @@ public class ClassesMenuFrag extends Fragment {
 	}
 
 	private void initControls() {
-		Button btnAddClass = (Button) getView().findViewById(R.id.btnAddClass);
-		btnAddClass.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		Button btnSettings = (Button) getView().findViewById(R.id.btnSettings);
+		Button btnCalendar = (Button) getView().findViewById(R.id.btnCalendar);
+		Button btnClasses = (Button) getView().findViewById(R.id.btnClasses);
+
+		FragmentManager fragmentManager = getFragmentManager();
+
+		btnClasses.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View arg0) {
+
 				FragmentTransaction transaction = getFragmentManager()
 						.beginTransaction();
-				AddClassFrag frag = new AddClassFrag();
-				transaction.replace(R.layout.class_menu, frag);
+				ClassesMenuFrag frag = new ClassesMenuFrag();
+				transaction.replace(R.layout.classes_menu, frag);
+				transaction.addToBackStack(null);
 				transaction.commit();
+
 			}
+
 		});
 	}
+
 }
