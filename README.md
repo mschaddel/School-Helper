@@ -24,7 +24,7 @@ Requirement 2: Attendance System
 Requirement 2a: Input Schedule
 Students will first need to set their schedule and class locations in the app.
 
-	When the student attempts to check into classes, the app will first verify the student’s location to ensure that the student is actually at class via the following methods:
+When the student attempts to check into classes, the app will first verify the student’s location to ensure that the student is actually at class via the following methods:
 
 Requirement 2b: via Location Services
 Will use location services to verify location
@@ -49,7 +49,7 @@ Student turns in their homework via Bluetooth to the professor.
 
 Requirement 4: Notification/Alert System
 
-	The method of notification can be changed within the settings page.
+The method of notification can be changed within the settings page.
 
 Requirement 4a: Homework Notifications
 Will notify students of approaching homework due dates
@@ -60,12 +60,12 @@ Will notify students of approaching test dates
 
 Requirement 5: Database System
 
-	An embedded database to store attendance, homework, and essentially all information used by the app.
+An embedded database to store attendance, homework, and essentially all information used by the app.
 
 Requirement 6: Class Document Storage
 
-	Allows students and professors to store their class documents, such as the class syllabus, on the app. Students will also be able to view these documents via the app. The location of storing can be determined via the settings page. Students can take a picture of their graded homework to keep track of their grades.
+Allows students and professors to store their class documents, such as the class syllabus, on the app. Students will also be able to view these documents via the app. The location of storing can be determined via the settings page. Students can take a picture of their graded homework to keep track of their grades.
 
 Requirement 7: Login System (Optional)
 
-	Used to keep track of user information. Allows user to choose between creating a student or a professor account.
+Used to keep track of user information. Allows user to choose between creating a student or a professor account.
