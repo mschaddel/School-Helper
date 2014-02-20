@@ -10,27 +10,26 @@ import android.widget.Button;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 
-public class ClassesMenuFrag extends Fragment {
+public class ClassesMenuFrag extends Activity {
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
-		View view = inflater.inflate(R.layout.classes_menu, container, false);
-		Button btnAddClass = (Button) view.findViewById(R.id.btnAddClass);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.classes_menu);
+
+		Button btnAddClass = (Button) findViewById(R.id.btnAddClass);
 
 		btnAddClass.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();
-	    	    AddClassFrag frag = new AddClassFrag();
-	    		transaction.replace(R.layout.class_menu, frag);
-	    		transaction.addToBackStack(null);
-	    		transaction.commit();
-			}
-		});
-		return view;
-	}
 
+			public void onClick(View arg0) {
+				Intent nextScreen = new Intent(getApplicationContext(),
+						AddClassFrag.class);
+				startActivity(nextScreen);
+			}
+
+		});
+
+	}
 }

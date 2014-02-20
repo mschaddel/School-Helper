@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Settings"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:textSize="20sp" />
 
     <Button
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSettings"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:text="Notifications" />
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnNotifications"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="60dp"
         android:text="Change Mode" />
 
     <Button
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnChangeMode"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="80dp"
         android:text="Change Profile" />
 
 </RelativeLayout>
