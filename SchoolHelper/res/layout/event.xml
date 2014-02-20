@@ -9,10 +9,10 @@
         android:layout_height="wrap_content" >
 
  	<TextView
-        android:id="@+id/a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ClassName:" />
+ 	    android:id="@+id/a"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="Class Name:" />
 
     <TextView
         android:id="@+id/tvClassName"
@@ -26,10 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/a"
-        android:text="ProfName:" />
+        android:text="Event Name:" />
 
     <TextView
-        android:id="@+id/tvProfName"
+        android:id="@+id/tvEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/b"
@@ -40,10 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/b"
-        android:text="ClassLoc:" />
+        android:text="Location:" />
 
     <TextView
-        android:id="@+id/tvClassLoc"
+        android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/c"
@@ -54,29 +54,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/c"
-        android:text="ClassTime:" />
+        android:text="Time:" />
 
     <TextView
-        android:id="@+id/tvClassTime"
+        android:id="@+id/tvEventTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/d"
         android:text=" " />
-
-    <Button
-        android:id="@+id/btnAddEvent"
+    
+    <TextView
+        android:id="@+id/e"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/d"
-        android:text="Add Event" />
+        android:text="Notes:" />
+
+    <TextView
+        android:id="@+id/tvNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/e"
+        android:text=" " />
 
     </RelativeLayout>
-
-    <ListView
-        android:id="@+id/lvEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp">
-    </ListView>
 
 
     <RelativeLayout
@@ -92,12 +93,12 @@
             android:text="Add Document" />
 
         <Button
-            android:id="@+id/btnDeleteClass"
+            android:id="@+id/btnDeleteEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:text="Delete Class" />
+            android:text="Delete Event" />
     </RelativeLayout>
 
 </LinearLayout>

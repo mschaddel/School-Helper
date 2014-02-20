@@ -134,7 +134,7 @@
                 android:text="Add Document" />
 
             <Button
-                android:id="@+id/btnAddClass"
+                android:id="@+id/btnAddEvent"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

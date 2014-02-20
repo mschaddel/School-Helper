@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.capstone.schoolhelper.AddClassFrag" />
+        <activity android:name="com.capstone.schoolhelper.AddEventFrag" />
+        <activity android:name="com.capstone.schoolhelper.CalendarFrag" />
+        <activity android:name="com.capstone.schoolhelper.ClassesMenuFrag" />
+        <activity android:name="com.capstone.schoolhelper.ClassMenuFrag" />
+        <activity android:name="com.capstone.schoolhelper.SettingsFrag" />
     </application>
 
 </manifest>
