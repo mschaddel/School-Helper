@@ -29,6 +29,7 @@ public class AddClassFrag extends Activity {
 				Intent nextScreen = new Intent(getApplicationContext(),
 						ClassMenuFrag.class);
 				startActivity(nextScreen);
+				finish();
 			}
 
 		});
