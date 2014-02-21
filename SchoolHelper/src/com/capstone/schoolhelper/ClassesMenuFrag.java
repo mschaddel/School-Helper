@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -19,8 +21,14 @@ public class ClassesMenuFrag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.classes_menu);
 
-		Button btnAddClass = (Button) findViewById(R.id.btnAddClass);
+		ListView lvClasses = (ListView) findViewById(R.id.lvClasses);
+		String[] items = { "THEO210", "HIST112", "CSCI496", "MATH405",
+				"FSTD270" };
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, items);
+		lvClasses.setAdapter(adapter);
 
+		Button btnAddClass = (Button) findViewById(R.id.btnAddClass);
 		btnAddClass.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {

@@ -23,6 +23,7 @@ public class AddEventFrag extends Activity {
 				Intent nextScreen = new Intent(getApplicationContext(),
 						EventFrag.class);
 				startActivity(nextScreen);
+				finish();
 			}
 
 		});

@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 			}
 
 		});
+		
 
 		btnCalendar.setOnClickListener(new View.OnClickListener() {
 
@@ -56,6 +57,8 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.actionbar, menu);
+		return super.onCreateOptionsMenu(menu);
+
 	}
 
 }
