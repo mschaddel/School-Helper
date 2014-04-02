@@ -36,11 +36,11 @@ public class SQLClass {
 		this.professor = professor;
 	}
 	
-	public String getlocation(){
+	public String getclasslocation(){
 		return this.location;
 	}
 	
-	public void setlocation(String location){
+	public void setclasslocation(String location){
 		this.location = location;
 	}
 	
@@ -48,15 +48,15 @@ public class SQLClass {
 		return this.class_time;
 	}
 	
-	public void setmode(String class_time){
+	public void setclasstime(String class_time){
 		this.class_time = class_time;
 	}
 	
-	public String getdocuments(){
+	public String getclassdocuments(){
 		return this.documents;
 	}
 	
-	public void setdocuments(String documents){
+	public void setclassdocuments(String documents){
 		this.documents = documents;
 	}
 }
