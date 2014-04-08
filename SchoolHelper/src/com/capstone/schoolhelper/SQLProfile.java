@@ -21,7 +21,7 @@ public class SQLProfile {
 	}
 	
 	public String getname(){
-		return this.name;
+		return name;
 	}
 	
 	public void setname(String name){

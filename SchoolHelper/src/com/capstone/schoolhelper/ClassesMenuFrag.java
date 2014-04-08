@@ -22,12 +22,12 @@ public class ClassesMenuFrag extends Activity {
 		setContentView(R.layout.classes_menu);
 
 		ListView lvClasses = (ListView) findViewById(R.id.lvClasses);
-		String[] items = { "THEO210", "HIST112", "CSCI496", "MATH405",
-				"FSTD270" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		//String[] items = SQLHandler.getClassesNameLoc();
+		
+		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, items);
 		lvClasses.setAdapter(adapter);
-
+*/
 		Button btnAddClass = (Button) findViewById(R.id.btnAddClass);
 		btnAddClass.setOnClickListener(new View.OnClickListener() {
 
