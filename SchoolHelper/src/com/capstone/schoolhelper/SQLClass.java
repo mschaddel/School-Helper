@@ -59,4 +59,6 @@ public class SQLClass {
 	public void setclassdocuments(String documents){
 		this.documents = documents;
 	}
+	
+	
 }

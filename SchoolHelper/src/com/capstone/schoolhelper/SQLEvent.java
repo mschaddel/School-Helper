@@ -67,7 +67,7 @@ public class SQLEvent {
 		return this.description;
 	}
 	
-	public void setmode(Long description){
+	public void setdescription(Long description){
 		this.description = description;
 	}
 	

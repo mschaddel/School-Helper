@@ -6,13 +6,13 @@ import com.capstone.schoolhelper.SQLClass;
 
 import java.util.ArrayList;
 import java.util.List;
- 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
 
 public class SQLHandler extends SQLiteOpenHelper{
 
@@ -72,6 +72,7 @@ public class SQLHandler extends SQLiteOpenHelper{
         db.execSQL(CREATE_CLASS_TABLE);
         db.execSQL(CREATE_EVENT_TABLE);
 		
+
 	}
 
 	@Override
@@ -84,15 +85,15 @@ public class SQLHandler extends SQLiteOpenHelper{
         onCreate(db);
     }
 	//create profile table	
-	public long createProfile(SQLProfile profile){
+	public long createProfile(SQLProfile profile) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, profile.getname());
 		values.put(KEY_EMAIL, profile.getemail());
 		values.put(KEY_SCHOOL, profile.getschool());
 		values.put(KEY_NOTIFICATIONS, profile.getnotifications());
 		values.put(KEY_MODE, profile.getmode());
+
 		
 		long profile_id = db.insert(TABLE_PROFILE,null,values);
 		
@@ -336,6 +337,7 @@ public class SQLHandler extends SQLiteOpenHelper{
                 new String[] { String.valueOf(class_name) });	
 	}
 }
+
 
 
 
