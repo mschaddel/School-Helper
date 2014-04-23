@@ -14,30 +14,37 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 
-public class ClassesMenuFrag extends Activity {
+public class ClassesMenuFrag extends Fragment {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.classes_menu);
+		View view = inflater.inflate(R.layout.classes_menu, null);
 
-		ListView lvClasses = (ListView) findViewById(R.id.lvClasses);
-		//String[] items = SQLHandler.getClassesNameLoc();
-		
-		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, items);
-		lvClasses.setAdapter(adapter);
-*/
-		Button btnAddClass = (Button) findViewById(R.id.btnAddClass);
+		ListView lvClasses = (ListView) view.findViewById(R.id.lvClasses);
+		// String[] items = SQLHandler.getClassesNameLoc();
+
+		/*
+		 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		 * android.R.layout.simple_list_item_1, items);
+		 * lvClasses.setAdapter(adapter);
+		 */
+		Button btnAddClass = (Button) view.findViewById(R.id.btnAddClass);
 		btnAddClass.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				Intent nextScreen = new Intent(getApplicationContext(),
-						AddClassFrag.class);
-				startActivity(nextScreen);
+				// create a new fragment and specify the planet to show based on
+				// position
+				Fragment fragment = new AddClassFrag();
+				// Insert the fragment by replacing any existing fragment
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 			}
 
 		});
+		
+		return view;
 
 	}
 }
