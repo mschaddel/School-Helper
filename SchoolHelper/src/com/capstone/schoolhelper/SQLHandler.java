@@ -47,8 +47,8 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_CLASS_NAME = "class_name";
 
 	private static final String CREATE_PROFILE_TABLE = "CREATE TABLE "
-			+ TABLE_PROFILE + "(" + KEY_NAME + " TEXT PRIMARY KEY,"
-			+ KEY_EMAIL + " TEXT," + KEY_SCHOOL + " TEXT," + KEY_NOTIFICATIONS
+			+ TABLE_PROFILE + "(" + KEY_NAME + " TEXT PRIMARY KEY," + KEY_EMAIL
+			+ " TEXT," + KEY_SCHOOL + " TEXT," + KEY_NOTIFICATIONS
 			+ " INTEGER," + KEY_MODE + " TEXT" + ")";
 
 	private static final String CREATE_CLASS_TABLE = "CREATE TABLE "
@@ -84,6 +84,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
+	// all below needs to be looked at for ids.
 	// create profile table
 	public long createProfile(SQLProfile profile) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -128,7 +129,8 @@ public class SQLHandler extends SQLiteOpenHelper {
 				np.setemail(c.getString(c.getColumnIndex(KEY_EMAIL)));
 				np.setschool(c.getString(c.getColumnIndex(KEY_SCHOOL)));
 				np.setmode(c.getString(c.getColumnIndex(KEY_MODE)));
-				np.setnotifications(c.getInt(c.getColumnIndex(KEY_NOTIFICATIONS)));
+				np.setnotifications(c.getInt(c
+						.getColumnIndex(KEY_NOTIFICATIONS)));
 
 				// adding to profile list
 				profile.add(np);

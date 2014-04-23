@@ -1,23 +1,24 @@
 package com.capstone.schoolhelper;
 
-import com.capstone.schoolhelper.SQLEvent;
+import com.capstone.schoolhelper.SQLClass;
 import com.capstone.schoolhelper.SQLHandler;
 import android.widget.ArrayAdapter;
 import java.util.List;
 
-public class EventAdapter extends ClassMenuFrag {
+public class ClassesAdapter extends ClassesMenuFrag {
 
 	SQLHandler db;
 
-	public ArrayAdapter<String> geteventnames() {
+	public ArrayAdapter<String> getclassesnames() {
 
-		List<SQLEvent> alleventnames = db.getEventNames();
-		String[] alleventsarray = alleventnames.toArray(new String[0]);
+		List<SQLClass> allclassesnames = db.getClassNames();
+		String[] allclassesarray = allclassesnames.toArray(new String[0]);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this.getActivity(), android.R.layout.simple_list_item_1,
-				alleventsarray);
+				allclassesarray);
 
 		return adapter;
+
 	}
 }

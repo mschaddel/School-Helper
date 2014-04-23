@@ -1,6 +1,7 @@
 package com.capstone.schoolhelper;
 
 public class SQLEvent {
+	int event_id;
 	String event_name;
 	String class_name;
 	String event_location;
@@ -21,6 +22,24 @@ public class SQLEvent {
 		this.event_time = event_time;
 		this.description = description;
 		this.event_documents = event_documents;
+	}
+	
+	public SQLEvent(int event_id, String event_name, String event_date, String class_name, String event_location,String event_time, Long description, String event_documents){
+		this.event_id = event_id;
+		this.event_name = event_name;
+		this.class_name = class_name;
+		this.event_location = event_location;
+		this.event_date = event_date;
+		this.event_time = event_time;
+		this.description = description;
+		this.event_documents = event_documents;
+	}
+	public long geteventid(){
+		return this.event_id;
+	}
+	
+	public void seteventid(int event_id){
+		this.event_id = event_id;
 	}
 	
 	public String geteventname(){

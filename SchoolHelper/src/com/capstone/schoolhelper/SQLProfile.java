@@ -2,6 +2,7 @@ package com.capstone.schoolhelper;
 
 public class SQLProfile {
 
+	int profile_id;
 	String name;
 	String email;
 	String school;
@@ -20,8 +21,25 @@ public class SQLProfile {
 		this.notifications = notifications;
 		this.mode = mode;
 	}
-
-	public String getname() {
+	
+	public SQLProfile(int profileid, String name, String email, String school, String mode, int notifications){
+		this.profile_id = profileid;
+		this.name = name;
+		this.email = email;
+		this.school = school;
+		this.mode = mode;
+		this.notifications = notifications;
+	}
+	
+	public long getprofileid(){
+		return this.profile_id;
+	}
+	
+	public void setprofileid(int profile_id){
+		this.profile_id = profile_id;
+	}
+	
+	public String getname(){
 		return this.name;
 	}
 
