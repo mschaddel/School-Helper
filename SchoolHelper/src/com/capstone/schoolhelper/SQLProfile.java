@@ -6,15 +6,14 @@ public class SQLProfile {
 	String name;
 	String email;
 	String school;
-	String mode;
 	int notifications;
-
+	String mode;
+	
 	public SQLProfile() {
 
 	}
 
-	public SQLProfile(String name, String email, String school,
-			int notifications, String mode) {
+	public SQLProfile(String name, String email, String school,int notifications, String mode) {
 		this.name = name;
 		this.email = email;
 		this.school = school;
@@ -22,13 +21,13 @@ public class SQLProfile {
 		this.mode = mode;
 	}
 	
-	public SQLProfile(int profileid, String name, String email, String school, String mode, int notifications){
+	public SQLProfile(int profileid, String name, String email, String school, int notifications, String mode){
 		this.profile_id = profileid;
 		this.name = name;
 		this.email = email;
 		this.school = school;
-		this.mode = mode;
 		this.notifications = notifications;
+		this.mode = mode;
 	}
 	
 	public long getprofileid(){
