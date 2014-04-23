@@ -13,6 +13,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import com.capstone.schoolhelper.ClassesAdapter;
 
 public class ClassesMenuFrag extends Activity {
 
@@ -21,7 +22,9 @@ public class ClassesMenuFrag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.classes_menu);
 
-		ListView lvClasses = (ListView) findViewById(R.id.lvClasses);
+		//ArrayAdapter<String> classnames = ClassesAdapter.getclassesnames();
+		
+		//ListView lvClasses = (ListView) findViewById(R.id.lvClasses);
 		//String[] items = SQLHandler.getClassesNameLoc();
 		
 		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

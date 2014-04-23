@@ -1,6 +1,7 @@
 package com.capstone.schoolhelper;
 
 public class SQLClass {
+	int class_id;
 	String class_name;
 	String professor;
 	String location;
@@ -17,7 +18,23 @@ public class SQLClass {
 		this.location = location;
 		this.class_time = class_time;
 		this.documents = documents;
-		
+	}
+	
+	public SQLClass(int class_id, String class_name, String professor, String location, String class_time, String documents){
+		this.class_id = class_id;
+		this.class_name = class_name;
+		this.professor = professor;
+		this.location = location;
+		this.class_time = class_time;
+		this.documents = documents;
+	}
+	
+	public long getclassid(){
+		return this.class_id;
+	}
+	
+	public void setclassid(int class_id){
+		this.class_id = class_id;
 	}
 	
 	public String getclassname(){
