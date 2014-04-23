@@ -36,15 +36,17 @@ public class ProfileCreatorFrag extends Fragment {
 			
 				if (name.length()>0 && email.length()>0 && school.length()>0) {
 					
-					SQLProfile profile = new SQLProfile(name, email, school, "student", 0);
-					
+					SQLHandler db = new SQLHandler(getActivity().getApplicationContext());
+					SQLProfile profile = new SQLProfile(name, email, school, 0, "student");
+					MainActivity.profileID = db.createProfile(profile);
+														
 					// create a new fragment and specify the planet to show based on
 					// position
 					Fragment fragment = new MainFrag();
 					// Insert the fragment by replacing any existing fragment
 					FragmentManager fragmentManager = getFragmentManager();
-					fragmentManager.beginTransaction()
-							.replace(R.id.content_frame, fragment).commit();
+//					fragmentManager.beginTransaction()
+//							.replace(R.id.content_frame, fragment).commit();
 				}
 				
 				else{

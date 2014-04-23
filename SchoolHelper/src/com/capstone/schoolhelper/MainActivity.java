@@ -22,7 +22,7 @@ import android.app.ActionBar;
 
 public class MainActivity extends Activity {
 
-
+	public static long profileID;
 	private String[] mPlanetTitles;
 	private DrawerLayout mDrawerLayout;
 	public static ListView mDrawerList;

@@ -1,5 +1,7 @@
 package com.capstone.schoolhelper;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -24,9 +26,16 @@ public class MainFrag extends Fragment {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.main_activity, null);
 		TextView lvWelcome = (TextView) view.findViewById(R.id.tvWelcome);
+		
+		
 		SQLHandler db = new SQLHandler(getActivity());
-		String name = db.getname();
-		lvWelcome.setText("Welcome " + name);
+//		List<SQLProfile> profile = db.getProfile();
+//		lvWelcome.setText("Welcome " + profile.get(0).getname());
+//		SQLProfile profile = db.getName(MainActivity.profileID);
+//		lvWelcome.setText("Welcome " + profile.getname());
+		
+		System.out.print(MainActivity.profileID);
+		
 		ListView lvMain = (ListView) view.findViewById(R.id.lvMain);
 		String[] lvItems = { "Homework", "Test", "Project", "Group Study" };
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, lvItems);
