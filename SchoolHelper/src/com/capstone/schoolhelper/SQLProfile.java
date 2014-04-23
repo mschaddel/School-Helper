@@ -6,28 +6,28 @@ public class SQLProfile {
 	String name;
 	String email;
 	String school;
-	String mode;
 	int notifications;
+	String mode;
 	
-	public SQLProfile(){
-		
+	public SQLProfile() {
+
 	}
-	
-	public SQLProfile(String name, String email, String school, String mode, int notifications){
+
+	public SQLProfile(String name, String email, String school,int notifications, String mode) {
 		this.name = name;
 		this.email = email;
 		this.school = school;
-		this.mode = mode;
 		this.notifications = notifications;
+		this.mode = mode;
 	}
 	
-	public SQLProfile(int profileid, String name, String email, String school, String mode, int notifications){
+	public SQLProfile(int profileid, String name, String email, String school, int notifications, String mode){
 		this.profile_id = profileid;
 		this.name = name;
 		this.email = email;
 		this.school = school;
-		this.mode = mode;
 		this.notifications = notifications;
+		this.mode = mode;
 	}
 	
 	public long getprofileid(){
@@ -41,40 +41,40 @@ public class SQLProfile {
 	public String getname(){
 		return this.name;
 	}
-	
-	public void setname(String name){
+
+	public void setname(String name) {
 		this.name = name;
 	}
-	
-	public String getemail(){
+
+	public String getemail() {
 		return this.email;
 	}
-	
-	public void setemail(String email){
+
+	public void setemail(String email) {
 		this.email = email;
 	}
-	
-	public String getschool(){
+
+	public String getschool() {
 		return this.school;
 	}
-	
-	public void setschool(String school){
+
+	public void setschool(String school) {
 		this.school = school;
 	}
-	
-	public String getmode(){
+
+	public String getmode() {
 		return this.mode;
 	}
-	
-	public void setmode(String mode){
+
+	public void setmode(String mode) {
 		this.mode = mode;
 	}
-	
-	public int getnotifications(){
+
+	public int getnotifications() {
 		return this.notifications;
 	}
-	
-	public void setnotifications(int notifications){
+
+	public void setnotifications(int notifications) {
 		this.notifications = notifications;
 	}
 }

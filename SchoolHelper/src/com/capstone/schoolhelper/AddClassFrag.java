@@ -12,27 +12,32 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 
-public class AddClassFrag extends Activity {
+public class AddClassFrag extends Fragment {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_class);
+		View view = inflater.inflate(R.layout.add_class, null);
 
-		Button btnAddDoc = (Button) findViewById(R.id.btnAddDoc);
-		Button btnAddClass = (Button) findViewById(R.id.btnAddClass);
+		Button btnAddDoc = (Button) view.findViewById(R.id.btnAddDoc);
+		Button btnAddClass = (Button) view.findViewById(R.id.btnAddClass);
 
 
 		btnAddClass.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				Intent nextScreen = new Intent(getApplicationContext(),
-						ClassMenuFrag.class);
-				startActivity(nextScreen);
-				finish();
+				// create a new fragment and specify the planet to show based on
+				// position
+				Fragment fragment = new ClassesMenuFrag();
+				// Insert the fragment by replacing any existing fragment
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 			}
 
 		});
+		
+		return view;
 
 	}
 }

@@ -22,51 +22,44 @@ import android.app.ActionBar;
 
 public class MainActivity extends Activity {
 
-	/* Testin */
-
+	public static long profileID;
 	private String[] mPlanetTitles;
 	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
+	public static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence title;
-
-	/* Tesin */
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawer_layout);
 
-		/** TESTING */
+		// create a new fragment and specify the planet to show based on
+		// position
+		Fragment fragment = new ProfileCreatorFrag();
+		// Insert the fragment by replacing any existing fragment
+		FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-		title = getActionBar().getTitle();
+		getActionBar().setTitle("EduTech");
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		// Set the adapter for the list view
-		// mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-		// R.layout.drawer_list_item, mPlanetTitles));
+		String[] items = { "Today's Events", "Classes", "Calender", "Settings" };
 
-		String[] items = { "Classes", "Calender", "Today's Events", "Settings" };
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		//		android.R.layout.simple_list_item_1, items);
-		//mDrawerList.setAdapter(adapter);
-
-		 // Set the adapter for the list view
-        
+		// Set the adapter for the list view
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_item,R.id.content, items));
-		
+				R.layout.drawer_item, R.id.content, items));
+
 		// Set the list's click listener
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-		mDrawerToggle = new ActionBarDrawerToggle(
-			this, /* host Activity */
-			mDrawerLayout, /* DrawerLayout object */
-			R.drawable.ic_drawer, /* nav drawer icon to replace 'Up' caret */
-			R.string.drawer_open, /* "open drawer" description */
-			R.string.drawer_close /* "close drawer" description */) 
-			{
+		mDrawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
+		mDrawerLayout, /* DrawerLayout object */
+		R.drawable.ic_drawer, /* nav drawer icon to replace 'Up' caret */
+		R.string.drawer_open, /* "open drawer" description */
+		R.string.drawer_close /* "close drawer" description */) {
 
 			/** Called when a drawer has settled in a completely closed state. */
 
@@ -76,10 +69,12 @@ public class MainActivity extends Activity {
 
 			/** Called when a drawer has settled in a completely open state. */
 
-			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle("Open Drawer");
-			}
+			// public void onDrawerOpened(View drawerView) {
+			// getActionBar().setTitle("Open Drawer");
+			// }
 		};
+
+		
 
 		// Set the drawer toggle as the DrawerListener
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -87,42 +82,6 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
-		// Testin */
-
-
-		/*Button btnSettings = (Button) findViewById(R.id.btnSettings);
-		Button btnCalendar = (Button) findViewById(R.id.btnCalendar);
-		Button btnClasses = (Button) findViewById(R.id.btnClasses);
-
-		btnClasses.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				Intent nextScreen = new Intent(getApplicationContext(),
-						ClassesMenuFrag.class);
-				startActivity(nextScreen);
-			}
-
-		});
-
-		btnCalendar.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				Intent nextScreen = new Intent(getApplicationContext(),
-						CalendarFrag.class);
-				startActivity(nextScreen);
-			}
-
-		});
-
-		btnSettings.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				Intent nextScreen = new Intent(getApplicationContext(),
-						SettingsFrag.class);
-				startActivity(nextScreen);
-			}
-
-		});*/
 	}
 
 	private class DrawerItemClickListener implements
@@ -175,43 +134,66 @@ public class MainActivity extends Activity {
 	// Swaps fragments in the main content view
 
 	private void selectItem(int position) {
-		// create a new fragment and specify the planet to show based on
-		// position
-		Fragment fragment = new OpertingSystemFrag();
-		Bundle args = new Bundle();
-		args.putInt(OpertingSystemFrag.ARG_OS, position);
-		fragment.setArguments(args);
 
-		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+		if (position == 0) {
+			// create a new fragment and specify the planet to show based on
+			// position
+			Fragment fragment = new MainFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
 
-		// Highlight the selected item, update the title, and close the drawer
-		mDrawerList.setItemChecked(position, true);
-		getActionBar().setTitle((mPlanetTitles[position]));
-		mDrawerLayout.closeDrawer(mDrawerList);
+			// Highlight the selected item, update the title, and close the
+			// drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		}
+		if (position == 1) {
+			// create a new fragment and specify the planet to show based on
+			// position
+			Fragment fragment = new ClassesMenuFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+
+			// Highlight the selected item, update the title, and close the
+			// drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		}
+		if (position == 2) {
+			// create a new fragment and specify the planet to show based on
+			// position
+			Fragment fragment = new CalendarFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+
+			// Highlight the selected item, update the title, and close the
+			// drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		}
+		if (position == 3) {
+			// create a new fragment and specify the planet to show based on
+			// position
+			Fragment fragment = new SettingsFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+
+			// Highlight the selected item, update the title, and close the
+			// drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		}
 	}
-
-	/*
-	 * 
-	 * // NEW
-	 * 
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) { MenuInflater
-	 * inflater = getMenuInflater(); inflater.inflate(R.menu.actionbar, menu);
-	 * return true; }
-	 * 
-	 * // NEW
-	 * 
-	 * @Override public boolean onOptionsItemSelected(MenuItem item) { switch
-	 * (item.getItemId()) { case R.id.action_refresh: Toast.makeText(this,
-	 * "Action refresh selected", Toast.LENGTH_SHORT) .show(); break; case
-	 * R.id.action_settings: Toast.makeText(this, "Action Settings selected",
-	 * Toast.LENGTH_SHORT) .show(); break;
-	 * 
-	 * default: break; }
-	 * 
-	 * return true; }
-	 */
-
 }
