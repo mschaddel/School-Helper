@@ -26,17 +26,20 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String TABLE_CLASS = "class";
 	private static final String TABLE_EVENT = "event";
 	// Profile fields
+	private static final String KEY_PROFILEID = "profile_id";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_SCHOOL = "school";
 	private static final String KEY_NOTIFICATIONS = "notifications";
 	private static final String KEY_MODE = "mode";
 	// Class Fields
+	private static final String KEY_CLASSID = "class_id";
 	private static final String KEY_PROFESSOR = "professor";
 	private static final String KEY_CLASS_LOCATION = "location";
 	private static final String KEY_CLASS_TIME = "class_time";
 	private static final String KEY_CLASS_DOCUMENTS = "documents";
 	// Event Fields
+	private static final String KEY_EVENTID = "event_id";
 	private static final String KEY_EVENT_NAME = "event_name";
 	private static final String KEY_EVENT_LOCATION = "event_location";
 	private static final String KEY_EVENT_DATE = "event_date";
@@ -47,17 +50,17 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_CLASS_NAME = "class_name";
 
 	private static final String CREATE_PROFILE_TABLE = "CREATE TABLE "
-			+ TABLE_PROFILE + "(" + KEY_NAME + " TEXT PRIMARY KEY," + KEY_EMAIL
+			+ TABLE_PROFILE + "(" + KEY_PROFILEID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_EMAIL
 			+ " TEXT," + KEY_SCHOOL + " TEXT," + KEY_NOTIFICATIONS
 			+ " INTEGER," + KEY_MODE + " TEXT" + ")";
 
 	private static final String CREATE_CLASS_TABLE = "CREATE TABLE "
-			+ TABLE_CLASS + "(" + KEY_CLASS_NAME + " TEXT PRIMARY KEY,"
+			+ TABLE_CLASS + "(" + KEY_CLASSID + " INTEGER PRIMARY KEY," + KEY_CLASS_NAME + " TEXT,"
 			+ KEY_PROFESSOR + " TEXT," + KEY_CLASS_LOCATION + " TEXT,"
 			+ KEY_CLASS_TIME + " TIME," + KEY_CLASS_DOCUMENTS + " TEXT" + ")";
 
 	private static final String CREATE_EVENT_TABLE = "CREATE TABLE "
-			+ TABLE_EVENT + "(" + KEY_EVENT_NAME + " TEXT PRIMARY KEY,"
+			+ TABLE_EVENT + "(" + KEY_EVENTID + " INTEGER PRIMARY KEY," + KEY_EVENT_NAME + " TEXT,"
 			+ KEY_EVENT_DATE + " DATE," + KEY_EVENT_LOCATION + " TEXT,"
 			+ KEY_EVENT_TIME + " INTEGER," + KEY_DESCRIPTION + " TEXT,"
 			+ KEY_EVENT_DOCUMENTS + " TEXT" + ")";

@@ -45,8 +45,8 @@ public class ProfileCreatorFrag extends Fragment {
 					Fragment fragment = new MainFrag();
 					// Insert the fragment by replacing any existing fragment
 					FragmentManager fragmentManager = getFragmentManager();
-//					fragmentManager.beginTransaction()
-//							.replace(R.id.content_frame, fragment).commit();
+					fragmentManager.beginTransaction()
+							.replace(R.id.content_frame, fragment).commit();
 				}
 				
 				else{
