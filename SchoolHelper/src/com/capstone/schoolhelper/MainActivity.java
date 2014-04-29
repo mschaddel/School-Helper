@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		// Set the adapter for the list view
-		String[] items = { "Today's Events", "Classes", "Calender", "Settings" };
+		String[] items = { "Today's Events", "Classes", "Calender", "Settings", "Documents"};
 
 		// Set the adapter for the list view
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -188,6 +188,18 @@ public class MainActivity extends Activity {
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, fragment).commit();
+
+			// Highlight the selected item, update the title, and close the
+			// drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		}
+		if (position == 4) {
+			// create a new fragment and specify the planet to show based on
+			// position
+		    Intent intent = new Intent(this, DocumentViewFrag.class);
+			startActivity(intent);
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
