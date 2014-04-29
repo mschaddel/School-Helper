@@ -29,8 +29,8 @@ public class MainFrag extends Fragment {
 		
 		
 		SQLHandler db = new SQLHandler(getActivity());
-//		List<SQLProfile> profile = db.getProfile();
-//		lvWelcome.setText("Welcome " + profile.get(0).getname());
+		List<SQLProfile> profile = db.getProfile();
+		lvWelcome.setText("Welcome " + profile.get(0).getname());
 //		SQLProfile profile = db.getName(MainActivity.profileID);
 //		lvWelcome.setText("Welcome " + profile.getname());
 		
