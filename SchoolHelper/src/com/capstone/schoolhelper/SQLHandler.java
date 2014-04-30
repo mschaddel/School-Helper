@@ -256,7 +256,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// create class
-	public long createEvent(SQLClass class_name) {
+	public long createClass(SQLClass class_name) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -266,7 +266,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_CLASS_TIME, class_name.getclasstime());
 		values.put(KEY_CLASS_DOCUMENTS, class_name.getclassdocuments());
 
-		long class_id = db.insert(TABLE_PROFILE, null, values);
+		long class_id = db.insert(TABLE_CLASS, null, values);
 
 		return class_id;
 	}
