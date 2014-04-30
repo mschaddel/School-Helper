@@ -7,22 +7,16 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name="com.capstone.schoolhelper.ProfileCreatorFrag"
+            android:name="com.capstone.schoolhelper.MainActivity"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name="com.capstone.schoolhelper.AddClassFrag" />
-        <activity android:name="com.capstone.schoolhelper.AddEventFrag" />
-        <activity android:name="com.capstone.schoolhelper.CalendarFrag" />
-        <activity android:name="com.capstone.schoolhelper.ClassesMenuFrag" />
-        <activity android:name="com.capstone.schoolhelper.ClassMenuFrag" />
-        <activity android:name="com.capstone.schoolhelper.EventFrag" />
-        <activity android:name="com.capstone.schoolhelper.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" >
                 </action>
@@ -30,7 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.capstone.schoolhelper.SettingsFrag" />
+        <activity
+            android:name="com.capstone.schoolhelper.DocumentViewFrag"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
