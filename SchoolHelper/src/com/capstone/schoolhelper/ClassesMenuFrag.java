@@ -1,11 +1,15 @@
 package com.capstone.schoolhelper;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,24 +17,44 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import com.capstone.schoolhelper.ClassesAdapter;
 
 public class ClassesMenuFrag extends Fragment {
 
+	public static String currentClass;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.classes_menu, null);
 
+		SQLHandler db = new SQLHandler(this.getActivity());
 		ListView lvClasses = (ListView) view.findViewById(R.id.lvClasses);
-		// String[] items = SQLHandler.getClassesNameLoc();
 
-		/*
-		 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		 * android.R.layout.simple_list_item_1, items);
-		 * lvClasses.setAdapter(adapter);
-		 */
+		List<String> allClassesNames = db.getClassNames();
+
+		if (!allClassesNames.isEmpty()) {
+			final String[] allClassesArray = allClassesNames
+					.toArray(new String[allClassesNames.size()]);
+
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+					this.getActivity(), android.R.layout.simple_list_item_1,
+					allClassesArray);
+
+			lvClasses.setAdapter(adapter);
+			
+			lvClasses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				public void onItemClick(AdapterView parent, View v, int position,
+						long id) {
+					currentClass = allClassesArray[position];
+					Fragment fragment = new ClassMenuFrag();
+					FragmentManager fragmentManager = getFragmentManager();
+					fragmentManager.beginTransaction()
+							.replace(R.id.content_frame, fragment).commit();
+				}
+			});
+		}
+
 		Button btnAddClass = (Button) view.findViewById(R.id.btnAddClass);
 		btnAddClass.setOnClickListener(new View.OnClickListener() {
 
@@ -40,11 +64,14 @@ public class ClassesMenuFrag extends Fragment {
 				Fragment fragment = new AddClassFrag();
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+				fragmentManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
 			}
 
 		});
+
 		
+
 		return view;
 
 	}

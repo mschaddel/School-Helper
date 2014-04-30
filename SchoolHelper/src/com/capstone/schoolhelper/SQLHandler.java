@@ -38,31 +38,36 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_CLASS_LOCATION = "location";
 	private static final String KEY_CLASS_TIME = "class_time";
 	private static final String KEY_CLASS_DOCUMENTS = "documents";
+	private static final String KEY_CLASS_NAME = "class_name";
+
 	// Event Fields
 	private static final String KEY_EVENTID = "event_id";
 	private static final String KEY_EVENT_NAME = "event_name";
+	private static final String KEY_EVENT_CLASS_NAME = "event_class_name";
 	private static final String KEY_EVENT_LOCATION = "event_location";
 	private static final String KEY_EVENT_DATE = "event_date";
 	private static final String KEY_EVENT_TIME = "event_time";
 	private static final String KEY_DESCRIPTION = "description";
 	private static final String KEY_EVENT_DOCUMENTS = "event_documents";
-	// Common Class Name
-	private static final String KEY_CLASS_NAME = "class_name";
+	
 
 	private static final String CREATE_PROFILE_TABLE = "CREATE TABLE "
-			+ TABLE_PROFILE + "(" + KEY_PROFILEID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_EMAIL
-			+ " TEXT," + KEY_SCHOOL + " TEXT," + KEY_NOTIFICATIONS
-			+ " INTEGER," + KEY_MODE + " TEXT" + ")";
+			+ TABLE_PROFILE + "(" + KEY_PROFILEID + " INTEGER PRIMARY KEY,"
+			+ KEY_NAME + " TEXT," + KEY_EMAIL + " TEXT," + KEY_SCHOOL
+			+ " TEXT," + KEY_NOTIFICATIONS + " INTEGER," + KEY_MODE + " TEXT"
+			+ ")";
 
 	private static final String CREATE_CLASS_TABLE = "CREATE TABLE "
-			+ TABLE_CLASS + "(" + KEY_CLASSID + " INTEGER PRIMARY KEY," + KEY_CLASS_NAME + " TEXT,"
-			+ KEY_PROFESSOR + " TEXT," + KEY_CLASS_LOCATION + " TEXT,"
-			+ KEY_CLASS_TIME + " TIME," + KEY_CLASS_DOCUMENTS + " TEXT" + ")";
+			+ TABLE_CLASS + "(" + KEY_CLASSID + " INTEGER PRIMARY KEY,"
+			+ KEY_CLASS_NAME + " TEXT," + KEY_PROFESSOR + " TEXT,"
+			+ KEY_CLASS_LOCATION + " TEXT," + KEY_CLASS_TIME + " INTEGER,"
+			+ KEY_CLASS_DOCUMENTS + " TEXT" + ")";
 
 	private static final String CREATE_EVENT_TABLE = "CREATE TABLE "
-			+ TABLE_EVENT + "(" + KEY_EVENTID + " INTEGER PRIMARY KEY," + KEY_EVENT_NAME + " TEXT,"
-			+ KEY_EVENT_DATE + " DATE," + KEY_EVENT_LOCATION + " TEXT,"
-			+ KEY_EVENT_TIME + " INTEGER," + KEY_DESCRIPTION + " TEXT,"
+			+ TABLE_EVENT + "(" + KEY_EVENTID + " INTEGER PRIMARY KEY,"
+			+ KEY_EVENT_NAME + " TEXT," + KEY_EVENT_CLASS_NAME + " TEXT,"
+			+ KEY_EVENT_LOCATION + " TEXT," + KEY_EVENT_DATE + " TEXT,"
+			+ KEY_EVENT_TIME + " TEXT," + KEY_DESCRIPTION + " TEXT,"
 			+ KEY_EVENT_DOCUMENTS + " TEXT" + ")";
 
 	public SQLHandler(Context context) {
@@ -156,14 +161,14 @@ public class SQLHandler extends SQLiteOpenHelper {
 
 		ContentValues values = new ContentValues();
 		values.put(KEY_EVENT_NAME, event.geteventname());
-		values.put(KEY_CLASS_NAME, event.getclassname());
+		values.put(KEY_EVENT_CLASS_NAME, event.getclassname());
 		values.put(KEY_EVENT_LOCATION, event.geteventlocation());
 		values.put(KEY_EVENT_DATE, event.geteventdate());
 		values.put(KEY_EVENT_TIME, event.geteventtime());
 		values.put(KEY_DESCRIPTION, event.getdescription());
 		values.put(KEY_EVENT_DOCUMENTS, event.geteventdocuments());
 
-		long event_id = db.insert(TABLE_PROFILE, null, values);
+		long event_id = db.insert(TABLE_EVENT, null, values);
 
 		return event_id;
 	}
@@ -189,21 +194,18 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all events for a class
-	public List<SQLEvent> getallEventsClass(String class_name) {
-		List<SQLEvent> event = new ArrayList<SQLEvent>();
+	public List<String> getallEventsClass(String class_name) {
+		List<String> event = new ArrayList<String>();
 
-		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
-				+ KEY_CLASS_NAME + " = '" + class_name + "'";
+		String Query = "SELECT event_name FROM " + TABLE_EVENT + " WHERE "
+				+ KEY_EVENT_CLASS_NAME + " = '" + class_name + "'";
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(Query, null);
 		if (c.moveToFirst()) {
 			do {
-				SQLEvent ne = new SQLEvent();
-				ne.seteventname(c.getString(c.getColumnIndex(KEY_EVENT_NAME)));
-
 				// adding to event list
-				event.add(ne);
+				event.add(c.getString(c.getColumnIndex(KEY_EVENT_NAME)));
 			} while (c.moveToNext());
 		}
 		return event;
@@ -236,7 +238,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 
 		ContentValues values = new ContentValues();
 		values.put(KEY_EVENT_NAME, event.geteventname());
-		values.put(KEY_CLASS_NAME, event.getclassname());
+		values.put(KEY_EVENT_CLASS_NAME, event.getclassname());
 		values.put(KEY_EVENT_LOCATION, event.geteventlocation());
 		values.put(KEY_EVENT_DATE, event.geteventdate());
 		values.put(KEY_EVENT_TIME, event.geteventtime());
@@ -251,7 +253,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	// delete an event
 	public void deleteEvent(long event) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_PROFILE, KEY_EVENT_NAME + " = ?",
+		db.delete(TABLE_EVENT, KEY_EVENT_NAME + " = ?",
 				new String[] { String.valueOf(event) });
 	}
 
@@ -272,20 +274,16 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all class names
-	public List<SQLClass> getClassNames() {
-		List<SQLClass> class_names = new ArrayList<SQLClass>();
+	public List<String> getClassNames() {
+		List<String> class_names = new ArrayList<String>();
 
-		String Query = "SELECT KEY_CLASS_NAME FROM " + TABLE_CLASS;
+		String Query = "SELECT class_name FROM " + TABLE_CLASS;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(Query, null);
 		if (c.moveToFirst()) {
 			do {
-				SQLClass nc = new SQLClass();
-				nc.setclassname(c.getString(c.getColumnIndex(KEY_CLASS_NAME)));
-
-				// adding to class list
-				class_names.add(nc);
+				class_names.add(c.getString(c.getColumnIndex(KEY_CLASS_NAME)));
 			} while (c.moveToNext());
 		}
 		return class_names;
@@ -314,8 +312,8 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get class information
-	public List<SQLClass> getClassesInfo(String class_name) {
-		List<SQLClass> class_names = new ArrayList<SQLClass>();
+	public List<String> getClassesInfo(String class_name) {
+		List<String> sqlClass = new ArrayList<String>();
 
 		String Query = "SELECT * FROM " + TABLE_CLASS + " WHERE "
 				+ KEY_CLASS_NAME + " = '" + class_name + "'";
@@ -324,19 +322,16 @@ public class SQLHandler extends SQLiteOpenHelper {
 		Cursor c = db.rawQuery(Query, null);
 		if (c.moveToFirst()) {
 			do {
-				SQLClass nc = new SQLClass();
-				nc.setclassname(c.getString(c.getColumnIndex(KEY_CLASS_NAME)));
-				nc.setclasslocation(c.getString(c
-						.getColumnIndex(KEY_CLASS_LOCATION)));
-				nc.setprofessor(c.getString(c.getColumnIndex(KEY_PROFESSOR)));
-				nc.setclasstime(c.getString(c.getColumnIndex(KEY_CLASS_TIME)));
-				nc.setclassdocuments(c.getString(c
-						.getColumnIndex(KEY_CLASS_DOCUMENTS)));
+				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_NAME)));
+				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_LOCATION)));
+				sqlClass.add(c.getString(c.getColumnIndex(KEY_PROFESSOR)));
+				sqlClass.add(Integer.toString(c.getInt(c
+						.getColumnIndex(KEY_CLASS_TIME))));
+				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_DOCUMENTS)));
 				// adding to class list
-				class_names.add(nc);
 			} while (c.moveToNext());
 		}
-		return class_names;
+		return sqlClass;
 	}
 
 	// update class

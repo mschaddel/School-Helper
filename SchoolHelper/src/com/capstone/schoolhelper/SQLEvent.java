@@ -7,14 +7,14 @@ public class SQLEvent {
 	String event_location;
 	String event_date;
 	String event_time;
-	Long description;
+	String description;
 	String event_documents;
 	
 	public SQLEvent(){
 		
 	}
 	
-	public SQLEvent(String event_name, String event_date, String class_name, String event_location,String event_time, Long description, String event_documents){
+	public SQLEvent(String event_name, String class_name, String event_location, String event_date,String event_time, String description, String event_documents){
 		this.event_name = event_name;
 		this.class_name = class_name;
 		this.event_location = event_location;
@@ -24,7 +24,7 @@ public class SQLEvent {
 		this.event_documents = event_documents;
 	}
 	
-	public SQLEvent(int event_id, String event_name, String event_date, String class_name, String event_location,String event_time, Long description, String event_documents){
+	public SQLEvent(int event_id, String event_name, String class_name, String event_location, String event_date,String event_time, String description, String event_documents){
 		this.event_id = event_id;
 		this.event_name = event_name;
 		this.class_name = class_name;
@@ -82,11 +82,11 @@ public class SQLEvent {
 		this.event_time = event_time;
 	}
 	
-	public Long getdescription(){
+	public String getdescription(){
 		return this.description;
 	}
 	
-	public void setdescription(Long description){
+	public void setdescription(String description){
 		this.description = description;
 	}
 	

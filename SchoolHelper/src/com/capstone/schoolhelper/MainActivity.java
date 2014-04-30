@@ -1,5 +1,7 @@
 package com.capstone.schoolhelper;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -28,25 +30,36 @@ public class MainActivity extends Activity {
 	public static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence title;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawer_layout);
 
-		// create a new fragment and specify the planet to show based on
-		// position
-		Fragment fragment = new ProfileCreatorFrag();
+		SQLHandler db = new SQLHandler(this);
+		List<SQLProfile> profile = db.getProfile();
+		
+		Fragment fragment;
+		
+		//Check if profile has been created
+		if (profile.isEmpty()) {
+			 fragment = new ProfileCreatorFrag();
+		} else {
+			 fragment = new MainFrag();
+		}
+		
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		fragmentManager.beginTransaction()
+				.replace(R.id.content_frame, fragment).commit();
 
 		getActionBar().setTitle("EduTech");
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		// Set the adapter for the list view
-		String[] items = { "Today's Events", "Classes", "Calender", "Settings" };
+		String[] items = { "Today's Events", "Classes", "Calender", "Settings",
+				"Documents" };
 
 		// Set the adapter for the list view
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -73,8 +86,6 @@ public class MainActivity extends Activity {
 			// getActionBar().setTitle("Open Drawer");
 			// }
 		};
-
-		
 
 		// Set the drawer toggle as the DrawerListener
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -188,6 +199,18 @@ public class MainActivity extends Activity {
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, fragment).commit();
+
+			// Highlight the selected item, update the title, and close the
+			// drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		}
+		if (position == 4) {
+			// create a new fragment and specify the planet to show based on
+			// position
+			Intent intent = new Intent(this, DocumentViewFrag.class);
+			startActivity(intent);
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
