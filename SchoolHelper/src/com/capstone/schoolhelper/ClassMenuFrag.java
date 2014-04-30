@@ -1,9 +1,12 @@
 package com.capstone.schoolhelper;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,22 +22,36 @@ public class ClassMenuFrag extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View view = inflater.inflate(R.layout.add_event, null);
+		View view = inflater.inflate(R.layout.class_menu, null);
 
-		ListView lvEvents = (ListView) view.findViewById(R.id.lvEvents);
-		String[] items = { "Homework", "Test", "Project", "Group Study" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				this.getActivity(), android.R.layout.simple_list_item_1, items);
-		lvEvents.setAdapter(adapter);
+		SQLHandler db = new SQLHandler(this.getActivity());
+
+		try {
+			List<String> allEventNames = db
+					.getallEventsClass(ClassesMenuFrag.currentClass);
+
+			final String[] allEventArray = allEventNames
+					.toArray(new String[allEventNames.size()]);
+
+			ListView lvEvents = (ListView) view.findViewById(R.id.lvEvents);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+					this.getActivity(), android.R.layout.simple_list_item_1,
+					allEventArray);
+			lvEvents.setAdapter(adapter);
+
+		} catch (SQLiteException e) {
+		}
+
+		List<String> sqlClass = db.getClassesInfo(ClassesMenuFrag.currentClass);
 
 		TextView tvClassName = (TextView) view.findViewById(R.id.tvClassName);
-		tvClassName.setText("Imaginary Class");
+		tvClassName.setText(ClassesMenuFrag.currentClass);
 		TextView tvProfName = (TextView) view.findViewById(R.id.tvProfName);
-		tvProfName.setText("Imaginary Professor");
+		tvProfName.setText(sqlClass.get(1));
 		TextView tvClassLoc = (TextView) view.findViewById(R.id.tvClassLoc);
-		tvClassLoc.setText("Room Imagination");
+		tvClassLoc.setText(sqlClass.get(2));
 		TextView tvClassTime = (TextView) view.findViewById(R.id.tvClassTime);
-		tvClassTime.setText("Imaginary Time");
+		tvClassTime.setText(sqlClass.get(3));
 
 		Button btnAddEvent = (Button) view.findViewById(R.id.btnAddEvent);
 		btnAddEvent.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +62,8 @@ public class ClassMenuFrag extends Fragment {
 				Fragment fragment = new AddEventFrag();
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+				fragmentManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
 			}
 
 		});
@@ -59,7 +77,8 @@ public class ClassMenuFrag extends Fragment {
 				Fragment fragment = new ClassesMenuFrag();
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+				fragmentManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
 			}
 		});
 		return view;

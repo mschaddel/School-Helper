@@ -42,6 +42,6 @@ public class MainFrag extends Fragment {
 		lvMain.setAdapter(adapter);
 		
 		return view;
-
+		
 	}
 }
