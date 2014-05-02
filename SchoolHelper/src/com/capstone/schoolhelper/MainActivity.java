@@ -1,8 +1,10 @@
 package com.capstone.schoolhelper;
 
+import java.io.File;
 import java.util.List;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -38,16 +40,16 @@ public class MainActivity extends Activity {
 
 		SQLHandler db = new SQLHandler(this);
 		List<SQLProfile> profile = db.getProfile();
-		
+
 		Fragment fragment;
-		
-		//Check if profile has been created
+
+		// Check if profile has been created
 		if (profile.isEmpty()) {
-			 fragment = new ProfileCreatorFrag();
+			fragment = new ProfileCreatorFrag();
 		} else {
-			 fragment = new MainFrag();
+			fragment = new MainFrag();
 		}
-		
+
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
