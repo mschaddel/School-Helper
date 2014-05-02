@@ -220,7 +220,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	public List<String> getallEventsClass(String class_name) {
 		List<String> event = new ArrayList<String>();
 
-		String Query = "SELECT event_name FROM " + TABLE_EVENT + " WHERE "
+		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
 				+ KEY_EVENT_CLASS_NAME + " = '" + class_name + "'";
 
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -238,7 +238,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		public List<Long> getallEventsClassID(String class_name) {
 			List<Long> event = new ArrayList<Long>();
 
-			String Query = "SELECT event_name FROM " + TABLE_EVENT + " WHERE "
+			String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
 					+ KEY_EVENT_CLASS_NAME + " = '" + class_name + "'";
 
 			SQLiteDatabase db = this.getReadableDatabase();
@@ -265,6 +265,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 			do {
 				SQLEvent ne = new SQLEvent();
 				ne.seteventname(c.getString(c.getColumnIndex(KEY_EVENT_NAME)));
+				ne.seteventtime(c.getString(c.getColumnIndex(KEY_EVENT_TIME)));
 
 				// adding to event list
 				event.add(ne);
@@ -272,6 +273,24 @@ public class SQLHandler extends SQLiteOpenHelper {
 		}
 		return event;
 	}
+	
+	// get all events for a Date
+		public List<Long> getallEventsDateIds(String date) {
+			List<Long> event = new ArrayList<Long>();
+
+			String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
+					+ KEY_EVENT_DATE + " = '" + date + "'";
+
+			SQLiteDatabase db = this.getReadableDatabase();
+			Cursor c = db.rawQuery(Query, null);
+			if (c.moveToFirst()) {
+				do {
+					event.add(c.getLong(c.getColumnIndex(KEY_EVENTID)));
+
+				} while (c.moveToNext());
+			}
+			return event;
+		}
 
 	// update an event
 	public int updateEvent(SQLEvent event) {
@@ -409,7 +428,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	// delete class
 	public void deleteClass(long class_id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_CLASS, KEY_CLASS_NAME + " = ?",
+		db.delete(TABLE_CLASS, KEY_CLASSID + " = ?",
 				new String[] { String.valueOf(class_id) });
 	}
 	

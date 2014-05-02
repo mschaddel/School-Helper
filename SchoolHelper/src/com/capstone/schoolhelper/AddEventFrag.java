@@ -16,10 +16,6 @@ import android.widget.TextView;
 
 public class AddEventFrag extends Fragment {
 
-	private int year;
-	private int month;
-	private int day;
-
 	static final int DATE_DIALOG_ID = 999;
 	static public TextView tvDate;
 	static public TextView tvTime;
@@ -60,9 +56,9 @@ public class AddEventFrag extends Fragment {
 					SQLHandler db = new SQLHandler(getActivity()
 							.getApplicationContext());
 					SQLEvent c = new SQLEvent(eventName, className, location,
-							tvDate.getText().toString(), tvTime.getText()
-									.toString(), "No Comments", "No documents");
+							tvDate.getText().toString(), tvTime.getText().toString(), "No Comments", "No documents");
 					db.createEvent(c);
+
 					// create a new fragment and specify the planet to show
 					// based on
 					// position

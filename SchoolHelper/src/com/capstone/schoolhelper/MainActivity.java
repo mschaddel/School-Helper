@@ -31,7 +31,8 @@ public class MainActivity extends Activity {
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence title;
 	public static boolean eventORclass; //false is event - true is class
-
+	public static boolean calendarORclass; //false is calendar - true is class
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

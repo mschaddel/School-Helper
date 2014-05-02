@@ -22,9 +22,13 @@ public class EventFrag extends Fragment {
 		View view = inflater.inflate(R.layout.event, null);
 
 		SQLHandler db = new SQLHandler(this.getActivity());
-		
-		List<String> event = db.getEventInfo(ClassMenuFrag.currentEvent);
-		
+
+		final List<String> event;
+		if (MainActivity.calendarORclass) {
+			event = db.getEventInfo(ClassMenuFrag.currentEvent);
+		} else {
+			event = db.getEventInfo(CalendarFrag.currentEvent);
+		}
 		TextView tvEventName = (TextView) view.findViewById(R.id.tvEventName);
 		tvEventName.setText(event.get(0));
 		TextView tvClassName = (TextView) view.findViewById(R.id.tvClassName);
@@ -42,9 +46,14 @@ public class EventFrag extends Fragment {
 		btnDeleteEvent.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				
+
 				SQLHandler db = new SQLHandler(getActivity());
-				db.deleteEvent(ClassMenuFrag.currentEventID);
+
+				if (MainActivity.calendarORclass) {
+					db.deleteEvent(ClassMenuFrag.currentEventID);
+				} else {
+					db.deleteEvent(CalendarFrag.currentEventID);
+				}
 				// create a new fragment and specify the planet to show based on
 				// position
 				Fragment fragment = new ClassMenuFrag();
@@ -57,8 +66,8 @@ public class EventFrag extends Fragment {
 		});
 		return view;
 	}
-	
-	public void onBackPressed(){
+
+	public void onBackPressed() {
 		// create a new fragment and specify the planet to show based on
 		// position
 		Fragment fragment = new ClassMenuFrag();

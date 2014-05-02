@@ -41,9 +41,9 @@ public class ClassesMenuFrag extends Fragment {
 			final Long[] allClassesIdArray = allClassesId
 					.toArray(new Long[allClassesNames.size()]);
 
-			ArrayAdapter<Long> adapter = new ArrayAdapter<Long>(
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 					this.getActivity(), android.R.layout.simple_list_item_1,
-					allClassesIdArray);
+					allClassesArray);
 
 			lvClasses.setAdapter(adapter);
 
