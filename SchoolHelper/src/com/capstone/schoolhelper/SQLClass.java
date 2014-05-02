@@ -5,14 +5,14 @@ public class SQLClass {
 	String class_name;
 	String professor;
 	String location;
-	int class_time;
+	String class_time;
 	String documents;
 	
 	public SQLClass(){
 		
 	}
 	
-	public SQLClass(String class_name, String professor, String location, int class_time, String documents){
+	public SQLClass(String class_name, String professor, String location, String class_time, String documents){
 		this.class_name = class_name;
 		this.professor = professor;
 		this.location = location;
@@ -20,7 +20,7 @@ public class SQLClass {
 		this.documents = documents;
 	}
 	
-	public SQLClass(int class_id, String class_name, String professor, String location, int class_time, String documents){
+	public SQLClass(int class_id, String class_name, String professor, String location, String class_time, String documents){
 		this.class_id = class_id;
 		this.class_name = class_name;
 		this.professor = professor;
@@ -61,11 +61,11 @@ public class SQLClass {
 		this.location = location;
 	}
 	
-	public int getclasstime(){
+	public String getclasstime(){
 		return this.class_time;
 	}
 	
-	public void setclasstime(int class_time){
+	public void setclasstime(String class_time){
 		this.class_time = class_time;
 	}
 	

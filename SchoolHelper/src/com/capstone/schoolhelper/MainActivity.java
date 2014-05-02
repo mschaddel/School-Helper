@@ -1,6 +1,7 @@
 package com.capstone.schoolhelper;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 
 import android.os.Bundle;
@@ -17,9 +18,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.app.ActionBar;
@@ -32,6 +36,8 @@ public class MainActivity extends Activity {
 	public static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence title;
+	public static boolean eventORclass; // false is event - true is class
+	public static boolean calendarORclass; // false is calendar - true is class
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -221,4 +227,5 @@ public class MainActivity extends Activity {
 
 		}
 	}
+
 }
