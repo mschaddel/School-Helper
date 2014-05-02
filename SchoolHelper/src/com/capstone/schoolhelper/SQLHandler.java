@@ -149,7 +149,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	// delete profile
 	public void deleteProfile(long profile_id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_PROFILE, KEY_NAME + " = ?",
+		db.delete(TABLE_PROFILE, KEY_PROFILEID + " = ?",
 				new String[] { String.valueOf(profile_id) });
 	}
 
@@ -292,10 +292,10 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// delete an event
-	public void deleteEvent(long event) {
+	public void deleteEvent(long event_id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_EVENT, KEY_EVENT_NAME + " = ?",
-				new String[] { String.valueOf(event) });
+		db.delete(TABLE_EVENT, KEY_EVENTID + " = ?",
+				new String[] { String.valueOf(event_id) });
 	}
 
 	// create class
@@ -412,5 +412,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		db.delete(TABLE_CLASS, KEY_CLASS_NAME + " = ?",
 				new String[] { String.valueOf(class_id) });
 	}
+	
 	
 }
