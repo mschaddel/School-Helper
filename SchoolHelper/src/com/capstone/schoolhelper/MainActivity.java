@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 	public static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence title;
+	public static boolean eventORclass; //false is event - true is class
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

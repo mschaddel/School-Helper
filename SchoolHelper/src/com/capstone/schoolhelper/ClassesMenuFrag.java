@@ -21,7 +21,8 @@ import android.content.Intent;
 public class ClassesMenuFrag extends Fragment {
 
 	public static String currentClass;
-	
+	public static Long currentClassID;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -32,27 +33,33 @@ public class ClassesMenuFrag extends Fragment {
 		ListView lvClasses = (ListView) view.findViewById(R.id.lvClasses);
 
 		List<String> allClassesNames = db.getClassNames();
+		List<Long> allClassesId = db.getClassIds();
 
 		if (!allClassesNames.isEmpty()) {
 			final String[] allClassesArray = allClassesNames
 					.toArray(new String[allClassesNames.size()]);
+			final Long[] allClassesIdArray = allClassesId
+					.toArray(new Long[allClassesNames.size()]);
 
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+			ArrayAdapter<Long> adapter = new ArrayAdapter<Long>(
 					this.getActivity(), android.R.layout.simple_list_item_1,
-					allClassesArray);
+					allClassesIdArray);
 
 			lvClasses.setAdapter(adapter);
-			
-			lvClasses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				public void onItemClick(AdapterView parent, View v, int position,
-						long id) {
-					currentClass = allClassesArray[position];
-					Fragment fragment = new ClassMenuFrag();
-					FragmentManager fragmentManager = getFragmentManager();
-					fragmentManager.beginTransaction()
-							.replace(R.id.content_frame, fragment).commit();
-				}
-			});
+
+			lvClasses
+					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						public void onItemClick(AdapterView parent, View v,
+								int position, long id) {
+							currentClass = allClassesArray[position];
+							currentClassID = allClassesIdArray[position];
+							Fragment fragment = new ClassMenuFrag();
+							FragmentManager fragmentManager = getFragmentManager();
+							fragmentManager.beginTransaction()
+									.replace(R.id.content_frame, fragment)
+									.commit();
+						}
+					});
 		}
 
 		Button btnAddClass = (Button) view.findViewById(R.id.btnAddClass);
@@ -67,12 +74,18 @@ public class ClassesMenuFrag extends Fragment {
 				fragmentManager.beginTransaction()
 						.replace(R.id.content_frame, fragment).commit();
 			}
-
 		});
 
-		
-
 		return view;
+	}
 
+	public void onBackPressed() {
+		// create a new fragment and specify the planet to show based on
+		// position
+		Fragment fragment = new MainFrag();
+		// Insert the fragment by replacing any existing fragment
+		FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.content_frame, fragment).commit();
 	}
 }

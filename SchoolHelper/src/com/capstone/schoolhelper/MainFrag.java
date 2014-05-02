@@ -30,7 +30,9 @@ public class MainFrag extends Fragment {
 		
 		SQLHandler db = new SQLHandler(getActivity());
 		List<SQLProfile> profile = db.getProfile();
-		lvWelcome.setText("Welcome " + profile.get(0).getname());
+		//lvWelcome.setText("Welcome " + profile.get(0).getname());
+		lvWelcome.setText("Welcome " + MainActivity.profileID);
+
 //		SQLProfile profile = db.getName(MainActivity.profileID);
 //		lvWelcome.setText("Welcome " + profile.getname());
 		

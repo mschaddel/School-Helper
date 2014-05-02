@@ -50,16 +50,16 @@
             android:layout_below="@+id/b"
             android:layout_toRightOf="@+id/c"
             android:text=" " />
-
+        
         <TextView
             android:id="@+id/d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/c"
-            android:text="Time:" />
+            android:text="Date:" />
 
         <TextView
-            android:id="@+id/tvEventTime"
+            android:id="@+id/tvEventDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/c"
@@ -71,14 +71,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/d"
+            android:text="Time:" />
+
+        <TextView
+            android:id="@+id/tvEventTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/d"
+            android:layout_toRightOf="@+id/e"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/e"
             android:text="Notes:" />
 
         <TextView
             android:id="@+id/tvNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/d"
-            android:layout_toRightOf="@+id/e"
+            android:layout_below="@+id/e"
+            android:layout_toRightOf="@+id/f"
             android:text=" " />
     </RelativeLayout>
 
