@@ -28,6 +28,10 @@
             android:name="com.capstone.schoolhelper.DocumentViewFrag"
             android:screenOrientation="portrait" >
         </activity>
+
+        <receiver
+            android:name="com.capstone.schoolhelper.AlarmReceiver">
+        </receiver>
     </application>
 
 </manifest>

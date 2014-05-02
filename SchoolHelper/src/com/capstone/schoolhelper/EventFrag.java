@@ -56,7 +56,13 @@ public class EventFrag extends Fragment {
 				}
 				// create a new fragment and specify the planet to show based on
 				// position
-				Fragment fragment = new ClassMenuFrag();
+				Fragment fragment;
+
+				if (MainActivity.calendarORclass) {
+					fragment = new ClassMenuFrag();
+				} else {
+					fragment = new CalendarFrag();
+				}
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
