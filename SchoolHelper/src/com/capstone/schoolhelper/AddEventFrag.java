@@ -1,16 +1,23 @@
 package com.capstone.schoolhelper;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import android.app.AlarmManager;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,6 +26,8 @@ public class AddEventFrag extends Fragment {
 	static final int DATE_DIALOG_ID = 999;
 	static public TextView tvDate;
 	static public TextView tvTime;
+	static public String closestEventName;
+	static public String closestEventTime;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +38,8 @@ public class AddEventFrag extends Fragment {
 
 		final EditText etClassName = (EditText) view
 				.findViewById(R.id.etClassName);
+		etClassName.setText(ClassesMenuFrag.currentClass);
+		etClassName.setEnabled(false);
 		final EditText etEventName = (EditText) view
 				.findViewById(R.id.etEventName);
 		final EditText etLocation = (EditText) view
@@ -56,9 +67,59 @@ public class AddEventFrag extends Fragment {
 					SQLHandler db = new SQLHandler(getActivity()
 							.getApplicationContext());
 					SQLEvent c = new SQLEvent(eventName, className, location,
-							tvDate.getText().toString(), tvTime.getText().toString(), "No Comments", "No documents");
+							tvDate.getText().toString(), tvTime.getText()
+									.toString(), "No Comments", "No documents");
 					db.createEvent(c);
 
+					String[] currentDate = tvDate.getText().toString()
+							.split("-");
+					String[] currentTime = tvTime.getText().toString()
+							.split(":");
+
+					final Calendar currenteDate = Calendar.getInstance();
+					currenteDate.set(Integer.parseInt(currentDate[2]),
+							Integer.parseInt(currentDate[1]),
+							Integer.parseInt(currentDate[0]),
+							Integer.parseInt(currentTime[0]),
+							Integer.parseInt(currentTime[1]));
+
+					// Check next event and set notifications
+					List<SQLEvent> events = db.getEventNames();
+					boolean newest = true;
+					for (int x = 0; x < events.size(); x++) {
+
+						String[] testDate = events.get(x).geteventdate()
+								.split("-");
+						String[] testTime = events.get(x).geteventtime()
+								.split(":");
+
+						Calendar testeDate = Calendar.getInstance();
+						testeDate.set(Integer.parseInt(testDate[2]),
+								Integer.parseInt(testDate[1]),
+								Integer.parseInt(testDate[0]),
+								Integer.parseInt(testTime[0]),
+								Integer.parseInt(testTime[1]));
+
+						if (testeDate.before(currenteDate)) {
+							newest = false;
+						}
+
+					}
+
+					if (newest) {
+						closestEventName = eventName;
+						closestEventTime = tvTime.getText().toString();
+						Intent myIntent = new Intent(getActivity(),
+								AlarmReceiver.class);
+						AlarmManager alarmManager = (AlarmManager) getActivity()
+								.getSystemService(Context.ALARM_SERVICE);
+						PendingIntent pendingIntent = PendingIntent
+								.getBroadcast(getActivity()
+										.getApplicationContext(), 24, myIntent,
+										PendingIntent.FLAG_CANCEL_CURRENT);
+						alarmManager.set(AlarmManager.RTC_WAKEUP,
+								currenteDate.getTimeInMillis(), pendingIntent);
+					}
 					// create a new fragment and specify the planet to show
 					// based on
 					// position
@@ -103,5 +164,4 @@ public class AddEventFrag extends Fragment {
 		return view;
 
 	}
-
 }

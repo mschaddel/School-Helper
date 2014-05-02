@@ -1,5 +1,6 @@
 package com.capstone.schoolhelper;
 
+import java.util.Calendar;
 import java.util.List;
 
 import android.os.Bundle;
@@ -15,9 +16,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.app.ActionBar;
@@ -30,9 +34,9 @@ public class MainActivity extends Activity {
 	public static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence title;
-	public static boolean eventORclass; //false is event - true is class
-	public static boolean calendarORclass; //false is calendar - true is class
-	
+	public static boolean eventORclass; // false is event - true is class
+	public static boolean calendarORclass; // false is calendar - true is class
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,16 +44,16 @@ public class MainActivity extends Activity {
 
 		SQLHandler db = new SQLHandler(this);
 		List<SQLProfile> profile = db.getProfile();
-		
+
 		Fragment fragment;
-		
-		//Check if profile has been created
+
+		// Check if profile has been created
 		if (profile.isEmpty()) {
-			 fragment = new ProfileCreatorFrag();
+			fragment = new ProfileCreatorFrag();
 		} else {
-			 fragment = new MainFrag();
+			fragment = new MainFrag();
 		}
-		
+
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
@@ -221,4 +225,5 @@ public class MainActivity extends Activity {
 
 		}
 	}
+
 }

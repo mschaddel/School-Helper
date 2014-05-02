@@ -2,6 +2,7 @@ package com.capstone.schoolhelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Fragment;
@@ -18,7 +19,7 @@ import android.widget.ListView;
 
 public class CalendarFrag extends Fragment {
 	public static String currentEvent;
-	public static long currentEventID=2;
+	public static long currentEventID = 2;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +29,44 @@ public class CalendarFrag extends Fragment {
 
 		CalendarView cvCalendar = (CalendarView) view
 				.findViewById(R.id.cvCalendar);
+
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat ss = new SimpleDateFormat("MM-dd-yyyy");
+		Date date = new Date();
+		String formattedDate = ss.format(date);
+
+		SQLHandler db = new SQLHandler(getActivity());
+
+		final List<SQLEvent> events = db.getallEventsDate(formattedDate);
+		final String[] eventNameDate = new String[events.size()];
+
+		List<Long> eventsIds = db.getallEventsDateIds(formattedDate);
+		final Long[] eventNameDateIds = eventsIds.toArray(new Long[eventsIds
+				.size()]);
+
+		for (int x = 0; x < events.size(); x++) {
+			eventNameDate[x] = (events.get(x).geteventtime() + " : " + events
+					.get(x).geteventname());
+		}
+		ListView lvCalendar = (ListView) view.findViewById(R.id.lvCalendar);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				view.getContext(), android.R.layout.simple_list_item_1,
+				eventNameDate);
+		lvCalendar.setAdapter(adapter);
+
+		lvCalendar
+				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					public void onItemClick(AdapterView parent, View v,
+							int position, long id) {
+						currentEvent = events.get(position).geteventname();
+						currentEventID = eventNameDateIds[position];
+
+						Fragment fragment = new EventFrag();
+						FragmentManager fragmentManager = getFragmentManager();
+						fragmentManager.beginTransaction()
+								.replace(R.id.content_frame, fragment).commit();
+					}
+				});
 
 		cvCalendar.setOnDateChangeListener(new OnDateChangeListener() {
 
@@ -46,12 +85,14 @@ public class CalendarFrag extends Fragment {
 
 				SQLHandler db = new SQLHandler(getActivity());
 
-				final List<SQLEvent> events = db.getallEventsDate(formattedDate);
+				final List<SQLEvent> events = db
+						.getallEventsDate(formattedDate);
 				final String[] eventNameDate = new String[events.size()];
 
 				List<Long> eventsIds = db.getallEventsDateIds(formattedDate);
-				final Long[] eventNameDateIds = eventsIds.toArray(new Long[eventsIds.size()]);
-				
+				final Long[] eventNameDateIds = eventsIds
+						.toArray(new Long[eventsIds.size()]);
+
 				for (int x = 0; x < events.size(); x++) {
 					eventNameDate[x] = (events.get(x).geteventtime() + " : " + events
 							.get(x).geteventname());
@@ -66,7 +107,8 @@ public class CalendarFrag extends Fragment {
 						.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 							public void onItemClick(AdapterView parent, View v,
 									int position, long id) {
-								currentEvent = events.get(position).geteventname();
+								currentEvent = events.get(position)
+										.geteventname();
 								currentEventID = eventNameDateIds[position];
 
 								Fragment fragment = new EventFrag();

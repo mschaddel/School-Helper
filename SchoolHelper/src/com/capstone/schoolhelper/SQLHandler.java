@@ -200,7 +200,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	public List<SQLEvent> getEventNames() {
 		List<SQLEvent> event = new ArrayList<SQLEvent>();
 
-		String Query = "SELECT KEY_EVENT_NAME FROM " + TABLE_EVENT;
+		String Query = "SELECT * FROM " + TABLE_EVENT;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(Query, null);
@@ -208,6 +208,8 @@ public class SQLHandler extends SQLiteOpenHelper {
 			do {
 				SQLEvent ne = new SQLEvent();
 				ne.seteventname(c.getString(c.getColumnIndex(KEY_EVENT_NAME)));
+				ne.seteventtime(c.getString(c.getColumnIndex(KEY_EVENT_TIME)));
+				ne.seteventdate(c.getString(c.getColumnIndex(KEY_EVENT_DATE)));
 
 				// adding to event list
 				event.add(ne);
