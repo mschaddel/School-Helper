@@ -4,9 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +21,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.lowagie.text.Document;
@@ -32,104 +38,50 @@ import com.lowagie.text.pdf.PdfWriter;
 
 public class DocumentViewFrag extends Fragment {
 
-	private Button createPDF, openPDF;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.document_viewer, null);
+		SQLHandler db = new SQLHandler(this.getActivity());
+		ListView lvListDocs = (ListView) view.findViewById(R.id.lvListDocs);
+		List<String> allDocNames = db
+				.getDocuments(DocumentMenuFrag.docCurrentClassID);
 
-		createPDF = (Button) view.findViewById(R.id.button1);
-		createPDF.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				createPDF();
-			}
-		});
+		final String[] allDocsArray = allDocNames
+				.toArray(new String[allDocNames.size()]);
 
-		openPDF = (Button) view.findViewById(R.id.button2);
-		openPDF.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				openPdf();
-			}
-		});
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				this.getActivity(), android.R.layout.simple_list_item_1,
+				allDocsArray);
+		lvListDocs.setAdapter(adapter);
+
+		lvListDocs
+				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					public void onItemClick(AdapterView parent, View v,
+							int position, long id) {
+						// Intent to view document
+						File file = new File(allDocsArray[position]);
+						Intent target = new Intent(Intent.ACTION_VIEW);
+						target.setDataAndType(Uri.fromFile(file),
+								"application/pdf");
+						target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+						Intent intent = Intent.createChooser(target,
+								"Open File");
+						try {
+							startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+							// Instruct the user to install a PDF reader here,
+							// or something
+							Toast.makeText(
+									getActivity().getApplicationContext(),
+									"Install a PDF reader", Toast.LENGTH_LONG)
+									.show();
+						}
+					}
+				});
 		return view;
-	}
 
-	public void createPDF() {
-		Document doc = new Document();
-
-		try {
-			String path = Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + "/droidText";
-
-			File dir = new File(path);
-			if (!dir.exists())
-				dir.mkdirs();
-
-			Log.d("PDFCreator", "PDF Path: " + path);
-
-			File file = new File(dir, "demo.pdf");
-			FileOutputStream fOut = new FileOutputStream(file);
-
-			PdfWriter.getInstance(doc, fOut);
-
-			// open the document
-			doc.open();
-
-			Paragraph p1 = new Paragraph(
-					"Hi! I am generating my first PDF using DroidText");
-			Font paraFont = new Font(Font.COURIER);
-			p1.setAlignment(Paragraph.ALIGN_CENTER);
-			p1.setFont(paraFont);
-
-			// add paragraph to document
-			doc.add(p1);
-
-			Paragraph p2 = new Paragraph(
-					"This is an example of a simple paragraph");
-			Font paraFont2 = new Font(Font.COURIER, 14.0f, Color.GREEN);
-			p2.setAlignment(Paragraph.ALIGN_CENTER);
-			p2.setFont(paraFont2);
-
-			doc.add(p2);
-
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getBaseContext()
-					.getResources(), R.drawable.android);
-			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			Image myImg = Image.getInstance(stream.toByteArray());
-			myImg.setAlignment(Image.MIDDLE);
-
-			// add image to document
-			doc.add(myImg);
-
-			// set footer
-			Phrase footerText = new Phrase("This is an example of a footer");
-			HeaderFooter pdfFooter = new HeaderFooter(footerText, false);
-			doc.setFooter(pdfFooter);
-
-		} catch (DocumentException de) {
-			Log.e("PDFCreator", "DocumentException:" + de);
-		} catch (IOException e) {
-			Log.e("PDFCreator", "ioException:" + e);
-		} finally {
-			doc.close();
-		}
-	}
-
-	void openPdf() {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		String path = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/PDF";
-
-		File file = new File(path, "demo.pdf");
-
-		intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-		getActivity().startActivity(intent);
 	}
 }

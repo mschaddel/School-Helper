@@ -235,24 +235,24 @@ public class SQLHandler extends SQLiteOpenHelper {
 		}
 		return event;
 	}
-	
+
 	// get all events for a class
-		public List<Long> getallEventsClassID(String class_name) {
-			List<Long> event = new ArrayList<Long>();
+	public List<Long> getallEventsClassID(String class_name) {
+		List<Long> event = new ArrayList<Long>();
 
-			String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
-					+ KEY_EVENT_CLASS_NAME + " = '" + class_name + "'";
+		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
+				+ KEY_EVENT_CLASS_NAME + " = '" + class_name + "'";
 
-			SQLiteDatabase db = this.getReadableDatabase();
-			Cursor c = db.rawQuery(Query, null);
-			if (c.moveToFirst()) {
-				do {
-					// adding to event list
-					event.add(c.getLong(c.getColumnIndex(KEY_EVENTID)));
-				} while (c.moveToNext());
-			}
-			return event;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(Query, null);
+		if (c.moveToFirst()) {
+			do {
+				// adding to event list
+				event.add(c.getLong(c.getColumnIndex(KEY_EVENTID)));
+			} while (c.moveToNext());
 		}
+		return event;
+	}
 
 	// get all events for a Date
 	public List<SQLEvent> getallEventsDate(String date) {
@@ -275,24 +275,24 @@ public class SQLHandler extends SQLiteOpenHelper {
 		}
 		return event;
 	}
-	
+
 	// get all events for a Date
-		public List<Long> getallEventsDateIds(String date) {
-			List<Long> event = new ArrayList<Long>();
+	public List<Long> getallEventsDateIds(String date) {
+		List<Long> event = new ArrayList<Long>();
 
-			String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
-					+ KEY_EVENT_DATE + " = '" + date + "'";
+		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
+				+ KEY_EVENT_DATE + " = '" + date + "'";
 
-			SQLiteDatabase db = this.getReadableDatabase();
-			Cursor c = db.rawQuery(Query, null);
-			if (c.moveToFirst()) {
-				do {
-					event.add(c.getLong(c.getColumnIndex(KEY_EVENTID)));
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(Query, null);
+		if (c.moveToFirst()) {
+			do {
+				event.add(c.getLong(c.getColumnIndex(KEY_EVENTID)));
 
-				} while (c.moveToNext());
-			}
-			return event;
+			} while (c.moveToNext());
 		}
+		return event;
+	}
 
 	// update an event
 	public int updateEvent(SQLEvent event) {
@@ -411,6 +411,34 @@ public class SQLHandler extends SQLiteOpenHelper {
 		return sqlClass;
 	}
 
+	// put document in Database
+	public void addDocument(String class_id, String doc_name) {
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(KEY_CLASS_DOCUMENTS, doc_name);
+
+		// updating row
+		db.update(TABLE_CLASS, values, KEY_CLASSID + " = ?",
+				new String[] { class_id });
+	}
+
+	// get documents from class
+
+	public List<String> getDocuments(long class_id) {
+		List<String> classDocs = new ArrayList<String>();
+		String Query = "SELECT documents FROM " + TABLE_CLASS + " WHERE "
+				+ KEY_CLASSID + " = '" + class_id + "'";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(Query, null);
+		if (c.moveToFirst()) {
+			classDocs.add(c.getString(c.getColumnIndex(KEY_CLASS_DOCUMENTS)));
+		}
+		return classDocs;
+
+	}
+
 	// update class
 	public int updateClass(SQLClass class_name) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -433,6 +461,5 @@ public class SQLHandler extends SQLiteOpenHelper {
 		db.delete(TABLE_CLASS, KEY_CLASSID + " = ?",
 				new String[] { String.valueOf(class_id) });
 	}
-	
-	
+
 }

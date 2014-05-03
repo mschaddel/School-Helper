@@ -217,8 +217,11 @@ public class MainActivity extends Activity {
 		if (position == 4) {
 			// create a new fragment and specify the planet to show based on
 			// position
-			Intent intent = new Intent(this, DocumentViewFrag.class);
-			startActivity(intent);
+			Fragment fragment = new DocumentMenuFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
 
 			// Highlight the selected item, update the title, and close the
 			// drawer

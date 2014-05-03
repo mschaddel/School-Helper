@@ -2,34 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
+
     <TextView
         android:id="@+id/tvDoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Documents" />
-    
-    <ListView
-        android:id="@+id/lvEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="330dp" >
-    </ListView>
-    
-    <Button
-        android:id="@+id/btnAddDoc"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="Add Doc" />
+        android:layout_centerHorizontal="true"
+        android:paddingTop="50dp"
+        android:text="Classes"
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnDeleteDoc"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Delete Doc" />
-        
-	
+    <ListView
+        android:id="@+id/lvDocs"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvDoc" >
+    </ListView>
+
 </RelativeLayout>

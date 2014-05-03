@@ -1,5 +1,7 @@
 package com.capstone.schoolhelper;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class TransitionDialog extends Activity {
+	public static String m_chosen;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -15,13 +18,15 @@ public class TransitionDialog extends Activity {
 		SimpleFileDialog FileOpenDialog = new SimpleFileDialog(
 				TransitionDialog.this, "FileOpen",
 				new SimpleFileDialog.SimpleFileDialogListener() {
-					String m_chosen;
 
 					@Override
 					public void onChosenDir(String chosenDir) {
 						// The code in this function will be executed when the
 						// dialog OK button is pushed
+						SQLHandler db = new SQLHandler(getApplicationContext());
 						m_chosen = chosenDir;
+						String id = (ClassesMenuFrag.currentClassID).toString();
+						db.addDocument(id, m_chosen);
 						Toast.makeText(TransitionDialog.this,
 								"Chosen FileOpenDialog File: " + m_chosen,
 								Toast.LENGTH_LONG).show();
