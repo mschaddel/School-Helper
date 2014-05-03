@@ -39,6 +39,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_CLASS_TIME = "class_time";
 	private static final String KEY_CLASS_DOCUMENTS = "documents";
 	private static final String KEY_CLASS_NAME = "class_name";
+	private static final String KEY_DAYS = "class_days";
 
 	// Event Fields
 	private static final String KEY_EVENTID = "event_id";
@@ -60,7 +61,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 			+ TABLE_CLASS + "(" + KEY_CLASSID + " INTEGER PRIMARY KEY,"
 			+ KEY_CLASS_NAME + " TEXT," + KEY_PROFESSOR + " TEXT,"
 			+ KEY_CLASS_LOCATION + " TEXT," + KEY_CLASS_TIME + " TEXT,"
-			+ KEY_CLASS_DOCUMENTS + " TEXT" + ")";
+			+ KEY_DAYS + " TEXT," + KEY_CLASS_DOCUMENTS + " TEXT" + ")";
 
 	private static final String CREATE_EVENT_TABLE = "CREATE TABLE "
 			+ TABLE_EVENT + "(" + KEY_EVENTID + " INTEGER PRIMARY KEY,"
@@ -328,6 +329,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_PROFESSOR, class_name.getprofessor());
 		values.put(KEY_CLASS_LOCATION, class_name.getclasslocation());
 		values.put(KEY_CLASS_TIME, class_name.getclasstime());
+		values.put(KEY_DAYS, class_name.getclassdays());
 		values.put(KEY_CLASS_DOCUMENTS, class_name.getclassdocuments());
 
 		long class_id = db.insert(TABLE_CLASS, null, values);
@@ -379,8 +381,11 @@ public class SQLHandler extends SQLiteOpenHelper {
 			do {
 				SQLClass nc = new SQLClass();
 				nc.setclassname(c.getString(c.getColumnIndex(KEY_CLASS_NAME)));
-				nc.setclasslocation(c.getString(c
-						.getColumnIndex(KEY_CLASS_LOCATION)));
+				nc.setclasslocation(c.getString(c.getColumnIndex(KEY_CLASS_LOCATION)));
+				nc.setprofessor(c.getString(c.getColumnIndex(KEY_PROFESSOR)));
+				nc.setclasstime(c.getString(c.getColumnIndex(KEY_CLASS_TIME)));
+				nc.setclassdays(c.getString(c.getColumnIndex(KEY_DAYS)));
+				nc.setclassdocuments(c.getString(c.getColumnIndex(KEY_CLASS_DOCUMENTS)));
 
 				// adding to class list
 				class_names.add(nc);
@@ -404,6 +409,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_LOCATION)));
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_PROFESSOR)));
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_TIME)));
+				sqlClass.add(c.getString(c.getColumnIndex(KEY_DAYS)));
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_DOCUMENTS)));
 				// adding to class list
 			} while (c.moveToNext());
@@ -448,6 +454,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_CLASS_LOCATION, class_name.getclasslocation());
 		values.put(KEY_PROFESSOR, class_name.getprofessor());
 		values.put(KEY_CLASS_TIME, class_name.getclasstime());
+		values.put(KEY_DAYS, class_name.getclassdays());
 		values.put(KEY_CLASS_DOCUMENTS, class_name.getclassdocuments());
 
 		// updating row
