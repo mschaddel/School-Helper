@@ -25,8 +25,10 @@ public class CalendarFrag extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		System.out.println("HELOOOOOOOOOOOOOOOOOOOOOOO");
 		final View view = inflater.inflate(R.layout.calendar, null);
 
+		System.out.println("HELOOOOOOOOOOOOOOOOOOOOOOO1");
 		CalendarView cvCalendar = (CalendarView) view
 				.findViewById(R.id.cvCalendar);
 
@@ -37,8 +39,24 @@ public class CalendarFrag extends Fragment {
 
 		SQLHandler db = new SQLHandler(getActivity());
 
+//		final List<SQLClass> classes = db.getClassesNameLoc();
+//		final String[] classesOfDay = new String[classes.size()];
+//		int y = 0;
+//		for (int x = 0; x < classes.size(); x++) {
+//			if (classes.get(x).getclassdays()
+//					.contains(String.valueOf(c.get(Calendar.DAY_OF_WEEK)))) {
+//				classesOfDay[y] = classes.get(x).getclasstime() + " : "
+//						+ classes.get(x).getclassname();
+//				y++;
+//			}
+//		}
+
+		System.out.println("HELOOOOOOOOOOOOOOOOOOOOOOO2");
+		
+		
 		final List<SQLEvent> events = db.getallEventsDate(formattedDate);
 		final String[] eventNameDate = new String[events.size()];
+//				+ classesOfDay.length];
 
 		List<Long> eventsIds = db.getallEventsDateIds(formattedDate);
 		final Long[] eventNameDateIds = eventsIds.toArray(new Long[eventsIds
@@ -48,12 +66,21 @@ public class CalendarFrag extends Fragment {
 			eventNameDate[x] = (events.get(x).geteventtime() + " : " + events
 					.get(x).geteventname());
 		}
+
+//		y = 0;
+//		for (int x = events.size(); x < classesOfDay.length; x++) {
+//			eventNameDate[x] = classesOfDay[y];
+//			y++;
+//		}
+
 		ListView lvCalendar = (ListView) view.findViewById(R.id.lvCalendar);
+
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				view.getContext(), android.R.layout.simple_list_item_1,
 				eventNameDate);
 		lvCalendar.setAdapter(adapter);
 
+		System.out.println("HELOOOOOOOOOOOOOOOOOOOOOOO3");
 		lvCalendar
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					public void onItemClick(AdapterView parent, View v,
@@ -122,7 +149,8 @@ public class CalendarFrag extends Fragment {
 			}
 		});
 
+		System.out.println("HELOOOOOOOOOOOOOOOOOOOOOOO4");
+
 		return view;
 	}
-
 }

@@ -75,50 +75,71 @@ public class AddEventFrag extends Fragment {
 							.split("-");
 					String[] currentTime = tvTime.getText().toString()
 							.split(":");
+					SimpleDateFormat sdf = new SimpleDateFormat(
+							"yyyy-MM-dd HH:mm:ss.S");
+					try {
+						Date date = sdf.parse(currentDate[2] + "-"
+								+ currentDate[0] + "-" + currentDate[1] + " "
+								+ currentTime[0] + ":" + currentTime[1]
+								+ ":00.0");
+						long time = date.getTime();
 
-					final Calendar currenteDate = Calendar.getInstance();
-					currenteDate.set(Integer.parseInt(currentDate[2]),
-							Integer.parseInt(currentDate[1]),
-							Integer.parseInt(currentDate[0]),
-							Integer.parseInt(currentTime[0]),
-							Integer.parseInt(currentTime[1]));
+						final Calendar currenteDate = Calendar.getInstance();
+						currenteDate.set(Integer.parseInt(currentDate[2]),
+								Integer.parseInt(currentDate[0]),
+								Integer.parseInt(currentDate[1]),
+								Integer.parseInt(currentTime[0]),
+								Integer.parseInt(currentTime[1]));
 
-					// Check next event and set notifications
-					List<SQLEvent> events = db.getEventNames();
-					boolean newest = true;
-					for (int x = 0; x < events.size(); x++) {
+						// Check next event and set notifications
+						List<SQLEvent> events = db.getEventNames();
+						boolean newest = true;
+//						for (int x = 0; x < events.size(); x++) {
+//
+//							String[] testDate = events.get(x).geteventdate()
+//									.split("-");
+//							String[] testTime = events.get(x).geteventtime()
+//									.split(":");
+//
+//							Calendar testeDate = Calendar.getInstance();
+//							testeDate.set(Integer.parseInt(testDate[2]),
+//									Integer.parseInt(testDate[0]),
+//									Integer.parseInt(testDate[1]),
+//									Integer.parseInt(testTime[0]),
+//									Integer.parseInt(testTime[1]));
+//
+//							if (testeDate.before(currenteDate)) {
+//								newest = false;
+//							}
+//
+//						}
 
-						String[] testDate = events.get(x).geteventdate()
-								.split("-");
-						String[] testTime = events.get(x).geteventtime()
-								.split(":");
-
-						Calendar testeDate = Calendar.getInstance();
-						testeDate.set(Integer.parseInt(testDate[2]),
-								Integer.parseInt(testDate[1]),
-								Integer.parseInt(testDate[0]),
-								Integer.parseInt(testTime[0]),
-								Integer.parseInt(testTime[1]));
-
-						if (testeDate.before(currenteDate)) {
-							newest = false;
+						if (newest) {
+							closestEventName = eventName;
+							closestEventTime = tvTime.getText().toString();
+							Intent myIntent = new Intent(getActivity(),
+									AlarmReceiver.class);
+							AlarmManager alarmManager = (AlarmManager) getActivity()
+									.getSystemService(Context.ALARM_SERVICE);
+							PendingIntent pendingIntent = PendingIntent
+									.getBroadcast(getActivity()
+											.getApplicationContext(), 0,
+											myIntent, 0);
+							alarmManager.set(AlarmManager.RTC_WAKEUP, time,
+									pendingIntent);
+							System.out.println("TESTING:          "
+									+ currenteDate
+									+ "/n/n"
+									+ +currenteDate.getTimeInMillis()
+									+ "   "
+									+ System.currentTimeMillis()
+									+ "  "
+									+ (currenteDate.getTimeInMillis() - System
+											.currentTimeMillis()));
 						}
-
-					}
-
-					if (newest) {
-						closestEventName = eventName;
-						closestEventTime = tvTime.getText().toString();
-						Intent myIntent = new Intent(getActivity(),
-								AlarmReceiver.class);
-						AlarmManager alarmManager = (AlarmManager) getActivity()
-								.getSystemService(Context.ALARM_SERVICE);
-						PendingIntent pendingIntent = PendingIntent
-								.getBroadcast(getActivity()
-										.getApplicationContext(), 24, myIntent,
-										PendingIntent.FLAG_CANCEL_CURRENT);
-						alarmManager.set(AlarmManager.RTC_WAKEUP,
-								currenteDate.getTimeInMillis(), pendingIntent);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 					// create a new fragment and specify the planet to show
 					// based on

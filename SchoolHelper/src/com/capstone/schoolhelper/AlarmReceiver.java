@@ -27,6 +27,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notification.defaults |= Notification.DEFAULT_SOUND;
 		nm.notify(0, notification);
+		
+		
+		
 	}
 
 }

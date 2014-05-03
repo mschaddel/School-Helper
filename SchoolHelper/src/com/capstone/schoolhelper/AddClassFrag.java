@@ -13,20 +13,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class AddClassFrag extends Fragment {
 	static final int DATE_DIALOG_ID = 999;
-	private int year;
-	private int month;
-	private int day;
 	static public TextView tvTime;
+	private static String days = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		View view = inflater.inflate(R.layout.add_class, null);
+		final View view = inflater.inflate(R.layout.add_class, null);
 
 		MainActivity.eventORclass = true;
 
@@ -49,18 +48,44 @@ public class AddClassFrag extends Fragment {
 				String profName = etProfName.getText().toString();
 				String school = etLocation.getText().toString();
 
-				if (!className.isEmpty() && !profName.isEmpty()
-						&& !school.isEmpty() && !tvTime.getText()
-						.toString().equals("Press above button.")) {
+				ToggleButton btM = (ToggleButton) view.findViewById(R.id.tbM);
+				ToggleButton btT = (ToggleButton) view.findViewById(R.id.tbT);
+				ToggleButton btW = (ToggleButton) view.findViewById(R.id.tbW);
+				ToggleButton btR = (ToggleButton) view.findViewById(R.id.tbR);
+				ToggleButton btF = (ToggleButton) view.findViewById(R.id.tbF);
+
+				days = "";
+
+				if (btM.isChecked()) {
+					days = days + "2";
+				}
+				if (btT.isChecked()) {
+					days = days + "3";
+				}
+				if (btW.isChecked()) {
+					days = days + "4";
+				}
+				if (btR.isChecked()) {
+					days = days + "5";
+				}
+				if (btF.isChecked()) {
+					days = days + "6";
+				}
+				if (!className.isEmpty()
+						&& !profName.isEmpty()
+						&& !school.isEmpty()
+						&& !tvTime.getText().toString()
+								.equals("Press above button.")
+						&& !days.isEmpty()
+						&& !tvTime.getText().toString()
+								.equals("Press above button.")) {
+
 					SQLHandler db = new SQLHandler(getActivity()
 							.getApplicationContext());
 
 					SQLClass c = new SQLClass(className, profName, school,
-							tvTime.getText().toString(), "No Documents");
+							tvTime.getText().toString(), days, "No Documents");
 					db.createClass(c);
-					// create a new fragment and specify the planet to show
-					// based on
-					// position
 					Fragment fragment = new ClassesMenuFrag();
 					// Insert the fragment by replacing any existing fragment
 					FragmentManager fragmentManager = getFragmentManager();

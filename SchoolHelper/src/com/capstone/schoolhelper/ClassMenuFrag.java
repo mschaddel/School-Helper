@@ -91,7 +91,9 @@ public class ClassMenuFrag extends Fragment {
 		tvClassLoc.setText(sqlClass.get(2));
 		TextView tvClassTime = (TextView) view.findViewById(R.id.tvClassTime);
 		tvClassTime.setText(sqlClass.get(3));
-
+		TextView tvClassDays = (TextView) view.findViewById(R.id.tvClassDays);
+		tvClassDays.setText(sqlClass.get(4));
+		
 		Button btnAddEvent = (Button) view.findViewById(R.id.btnAddEvent);
 		btnAddEvent.setOnClickListener(new View.OnClickListener() {
 

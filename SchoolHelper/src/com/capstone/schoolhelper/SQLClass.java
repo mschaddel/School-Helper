@@ -6,26 +6,29 @@ public class SQLClass {
 	String professor;
 	String location;
 	String class_time;
+	String days;
 	String documents;
 	
 	public SQLClass(){
 		
 	}
 	
-	public SQLClass(String class_name, String professor, String location, String class_time, String documents){
+	public SQLClass(String class_name, String professor, String location, String class_time, String days, String documents){
 		this.class_name = class_name;
 		this.professor = professor;
 		this.location = location;
 		this.class_time = class_time;
+		this.days = days;
 		this.documents = documents;
 	}
 	
-	public SQLClass(int class_id, String class_name, String professor, String location, String class_time, String documents){
+	public SQLClass(int class_id, String class_name, String professor, String location, String class_time, String days, String documents){
 		this.class_id = class_id;
 		this.class_name = class_name;
 		this.professor = professor;
 		this.location = location;
 		this.class_time = class_time;
+		this.days = days;
 		this.documents = documents;
 	}
 	
@@ -67,6 +70,14 @@ public class SQLClass {
 	
 	public void setclasstime(String class_time){
 		this.class_time = class_time;
+	}
+	
+	public String getclassdays(){
+		return this.days;
+	}
+	
+	public void setclassdays(String days){
+		this.days = days;
 	}
 	
 	public String getclassdocuments(){
