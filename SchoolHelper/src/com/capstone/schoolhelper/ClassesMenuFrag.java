@@ -2,21 +2,16 @@ package com.capstone.schoolhelper;
 
 import java.util.List;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 
 public class ClassesMenuFrag extends Fragment {
 
@@ -57,7 +52,7 @@ public class ClassesMenuFrag extends Fragment {
 							FragmentManager fragmentManager = getFragmentManager();
 							fragmentManager.beginTransaction()
 									.replace(R.id.content_frame, fragment)
-									.commit();
+									.addToBackStack(null).commit();
 						}
 					});
 		}
@@ -72,20 +67,12 @@ public class ClassesMenuFrag extends Fragment {
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment)
+						.addToBackStack(null).commit();
 			}
 		});
 
 		return view;
 	}
 
-	public void onBackPressed() {
-		// create a new fragment and specify the planet to show based on
-		// position
-		Fragment fragment = new MainFrag();
-		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
-	}
 }

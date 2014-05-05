@@ -2,10 +2,8 @@ package com.capstone.schoolhelper;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,23 +61,19 @@ public class EventFrag extends Fragment {
 				} else {
 					fragment = new CalendarFrag();
 				}
+				
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.popBackStack();
+				fragmentManager.popBackStack();
+
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment)
+						.addToBackStack(null).commit();
 			}
 
 		});
 		return view;
 	}
 
-	public void onBackPressed() {
-		// create a new fragment and specify the planet to show based on
-		// position
-		Fragment fragment = new ClassMenuFrag();
-		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
-	}
 }

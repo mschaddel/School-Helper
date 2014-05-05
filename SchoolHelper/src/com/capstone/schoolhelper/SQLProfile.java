@@ -6,39 +6,33 @@ public class SQLProfile {
 	String name;
 	String email;
 	String school;
-	int notifications;
-	String mode;
-	
+
 	public SQLProfile() {
 
 	}
 
-	public SQLProfile(String name, String email, String school,int notifications, String mode) {
+	public SQLProfile(String name, String email, String school) {
 		this.name = name;
 		this.email = email;
 		this.school = school;
-		this.notifications = notifications;
-		this.mode = mode;
 	}
-	
-	public SQLProfile(int profileid, String name, String email, String school, int notifications, String mode){
+
+	public SQLProfile(int profileid, String name, String email, String school) {
 		this.profile_id = profileid;
 		this.name = name;
 		this.email = email;
 		this.school = school;
-		this.notifications = notifications;
-		this.mode = mode;
 	}
-	
-	public long getprofileid(){
+
+	public long getprofileid() {
 		return this.profile_id;
 	}
-	
-	public void setprofileid(int profile_id){
+
+	public void setprofileid(int profile_id) {
 		this.profile_id = profile_id;
 	}
-	
-	public String getname(){
+
+	public String getname() {
 		return this.name;
 	}
 
@@ -62,19 +56,4 @@ public class SQLProfile {
 		this.school = school;
 	}
 
-	public String getmode() {
-		return this.mode;
-	}
-
-	public void setmode(String mode) {
-		this.mode = mode;
-	}
-
-	public int getnotifications() {
-		return this.notifications;
-	}
-
-	public void setnotifications(int notifications) {
-		this.notifications = notifications;
-	}
 }

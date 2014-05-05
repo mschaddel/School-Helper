@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Profile"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvProfile"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:text="Your Name:    "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvProfile"
+        android:layout_toRightOf="@+id/a"
+        android:paddingTop="20dp"
+        android:text="name"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a"
+        android:paddingLeft="20dp"
+        android:text="Your Email:     "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a"
+        android:layout_toRightOf="@+id/b"
+        android:text="email"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b"
+        android:paddingLeft="20dp"
+        android:text="Your School:  "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvProfileSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b"
+        android:layout_toRightOf="@+id/c"
+        android:text="school"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnDeleteProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:text="Delete Profile" />
+
+</RelativeLayout>

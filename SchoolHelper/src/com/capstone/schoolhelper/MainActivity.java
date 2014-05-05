@@ -1,36 +1,25 @@
 package com.capstone.schoolhelper;
 
-import java.io.File;
-import java.util.Calendar;
 import java.util.List;
 
-import android.os.Bundle;
-import android.os.Environment;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.app.AlarmManager;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.app.ActionBar;
 
 public class MainActivity extends Activity {
 
-	public static long profileID;
+	public static long profileID = 0;
 	private String[] mPlanetTitles;
 	private DrawerLayout mDrawerLayout;
 	public static ListView mDrawerList;
@@ -45,7 +34,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.drawer_layout);
 
 		SQLHandler db = new SQLHandler(this);
-		List<SQLProfile> profile = db.getProfile();
+		List<String> profile = db.getProfile();
 
 		Fragment fragment;
 
@@ -59,14 +48,15 @@ public class MainActivity extends Activity {
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+				.replace(R.id.content_frame, fragment).addToBackStack(null)
+				.commit();
 
 		getActionBar().setTitle("EduTech");
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		// Set the adapter for the list view
-		String[] items = { "Today's Events", "Classes", "Calender", "Settings",
+		String[] items = { "Today's Events", "Classes", "Calender", "Profile",
 				"Documents" };
 
 		// Set the adapter for the list view
@@ -84,9 +74,9 @@ public class MainActivity extends Activity {
 
 			/** Called when a drawer has settled in a completely closed state. */
 
-			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(title);
-			}
+			// public void onDrawerClosed(View view) {
+			// getActionBar().setTitle(title);
+			// }
 
 			/** Called when a drawer has settled in a completely open state. */
 
@@ -160,8 +150,11 @@ public class MainActivity extends Activity {
 			Fragment fragment = new MainFrag();
 			// Insert the fragment by replacing any existing fragment
 			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.popBackStack(null,
+					FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+					.replace(R.id.content_frame, fragment).addToBackStack(null)
+					.commit();
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
@@ -175,8 +168,11 @@ public class MainActivity extends Activity {
 			Fragment fragment = new ClassesMenuFrag();
 			// Insert the fragment by replacing any existing fragment
 			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.popBackStack(null,
+					FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+					.replace(R.id.content_frame, fragment).addToBackStack(null)
+					.commit();
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
@@ -190,8 +186,11 @@ public class MainActivity extends Activity {
 			Fragment fragment = new CalendarFrag();
 			// Insert the fragment by replacing any existing fragment
 			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.popBackStack(null,
+					FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+					.replace(R.id.content_frame, fragment).addToBackStack(null)
+					.commit();
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
@@ -202,11 +201,14 @@ public class MainActivity extends Activity {
 		if (position == 3) {
 			// create a new fragment and specify the planet to show based on
 			// position
-			Fragment fragment = new SettingsFrag();
+			Fragment fragment = new ProfileFrag();
 			// Insert the fragment by replacing any existing fragment
 			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.popBackStack(null,
+					FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+					.replace(R.id.content_frame, fragment).addToBackStack(null)
+					.commit();
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
@@ -220,14 +222,25 @@ public class MainActivity extends Activity {
 			Fragment fragment = new DocumentMenuFrag();
 			// Insert the fragment by replacing any existing fragment
 			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.popBackStack(null,
+					FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+					.replace(R.id.content_frame, fragment).addToBackStack(null)
+					.commit();
 
 			// Highlight the selected item, update the title, and close the
 			// drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerLayout.closeDrawer(mDrawerList);
 
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (getFragmentManager().getBackStackEntryCount() == 0) {
+		} else {
+			getFragmentManager().popBackStack();
 		}
 	}
 
