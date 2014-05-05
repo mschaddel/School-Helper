@@ -46,42 +46,59 @@ public class DocumentViewFrag extends Fragment {
 		SQLHandler db = new SQLHandler(this.getActivity());
 		ListView lvListDocs = (ListView) view.findViewById(R.id.lvListDocs);
 		List<String> allDocNames = db
-				.getDocuments(DocumentMenuFrag.docCurrentClassID);
+				.getClassDocuments(DocumentMenuFrag.docCurrentClassID);
+		if (!allDocNames.isEmpty()) {
+			final String[] allDocsArray = allDocNames
+					.toArray(new String[allDocNames.size()]);
 
-		final String[] allDocsArray = allDocNames
-				.toArray(new String[allDocNames.size()]);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+					this.getActivity(), android.R.layout.simple_list_item_1,
+					allDocsArray);
+			lvListDocs.setAdapter(adapter);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				this.getActivity(), android.R.layout.simple_list_item_1,
-				allDocsArray);
-		lvListDocs.setAdapter(adapter);
+			lvListDocs
+					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						public void onItemClick(AdapterView parent, View v,
+								int position, long id) {
+							// Intent to view document
+							File file = new File(allDocsArray[position]);
+							Intent target = new Intent(Intent.ACTION_VIEW);
+							target.setDataAndType(Uri.fromFile(file),
+									"application/pdf");
+							target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-		lvListDocs
-				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					public void onItemClick(AdapterView parent, View v,
-							int position, long id) {
-						// Intent to view document
-						File file = new File(allDocsArray[position]);
-						Intent target = new Intent(Intent.ACTION_VIEW);
-						target.setDataAndType(Uri.fromFile(file),
-								"application/pdf");
-						target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-
-						Intent intent = Intent.createChooser(target,
-								"Open File");
-						try {
-							startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-							// Instruct the user to install a PDF reader here,
-							// or something
-							Toast.makeText(
-									getActivity().getApplicationContext(),
-									"Install a PDF reader", Toast.LENGTH_LONG)
-									.show();
+							Intent intent = Intent.createChooser(target,
+									"Open File");
+							try {
+								startActivity(intent);
+							} catch (ActivityNotFoundException e) {
+								// Instruct the user to install a PDF reader
+								// here,
+								// or something
+								Toast.makeText(
+										getActivity().getApplicationContext(),
+										"Install a PDF reader",
+										Toast.LENGTH_LONG).show();
+							}
 						}
-					}
-				});
+					});
+		} else {
+			String[] lvItems = { "No Documents. Click to Add a Document." };
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+					this.getActivity(), android.R.layout.simple_list_item_1,
+					lvItems);
+			lvListDocs.setAdapter(adapter);
+			lvListDocs
+					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						public void onItemClick(AdapterView parent, View v,
+								int position, long id) {
+							MainActivity.docvieworclassmenu = false;
+							Intent intent = new Intent(getActivity(),
+									TransitionDialog.class);
+							startActivity(intent);
+						}
+					});
+		}
 		return view;
-
 	}
 }

@@ -38,10 +38,8 @@ import android.widget.Toast;
 
 public class ClassMenuFrag extends Fragment {
 
-
 	public static String currentEvent;
 	public static Long currentEventID;
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +48,7 @@ public class ClassMenuFrag extends Fragment {
 		View view = inflater.inflate(R.layout.class_menu, null);
 
 		MainActivity.calendarORclass = true;
-		
+
 		SQLHandler db = new SQLHandler(this.getActivity());
 		ListView lvEvents = (ListView) view.findViewById(R.id.lvEvents);
 		List<String> allEventNames = db
@@ -80,7 +78,7 @@ public class ClassMenuFrag extends Fragment {
 						.replace(R.id.content_frame, fragment).commit();
 			}
 		});
-		
+
 		List<String> sqlClass = db.getClassesInfo(ClassesMenuFrag.currentClass);
 
 		TextView tvClassName = (TextView) view.findViewById(R.id.tvClassName);
@@ -93,7 +91,7 @@ public class ClassMenuFrag extends Fragment {
 		tvClassTime.setText(sqlClass.get(3));
 		TextView tvClassDays = (TextView) view.findViewById(R.id.tvClassDays);
 		tvClassDays.setText(sqlClass.get(4));
-		
+
 		Button btnAddEvent = (Button) view.findViewById(R.id.btnAddEvent);
 		btnAddEvent.setOnClickListener(new View.OnClickListener() {
 
@@ -114,6 +112,20 @@ public class ClassMenuFrag extends Fragment {
 
 			public void onClick(View arg0) {
 				SQLHandler db = new SQLHandler(getActivity());
+				List<Long> classDocs = db
+						.getClassDocumentsID(ClassesMenuFrag.currentClassID);
+				List<Long> classEvents = db
+						.getallEventsClassID(ClassesMenuFrag.currentClass);
+				if (!classDocs.isEmpty()) {
+					for (int i = 0; i < classDocs.size(); i++) {
+						db.deleteDoc(classDocs.get(i));
+					}
+				}
+				if (!classEvents.isEmpty()) {
+					for (int i = 0; i < classEvents.size(); i++) {
+						db.deleteEvent(classEvents.get(i));
+					}
+				}
 				db.deleteClass(ClassesMenuFrag.currentClassID);
 				// create a new fragment and specify the planet to show based on
 				// position
@@ -129,6 +141,7 @@ public class ClassMenuFrag extends Fragment {
 		btnAddDoc.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
+				MainActivity.docvieworclassmenu = true;
 				Intent intent = new Intent(getActivity(),
 						TransitionDialog.class);
 				startActivity(intent);

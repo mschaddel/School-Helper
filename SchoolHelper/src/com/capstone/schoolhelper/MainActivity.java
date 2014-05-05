@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
 	private CharSequence title;
 	public static boolean eventORclass; // false is event - true is class
 	public static boolean calendarORclass; // false is calendar - true is class
+	public static boolean docvieworclassmenu; // false is docview - true is classmenu
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
