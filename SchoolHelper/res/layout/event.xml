@@ -12,21 +12,28 @@
             android:id="@+id/a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Class Name:" />
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="Class Name:  "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvClassName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/a"
-            android:text="" />
+            android:paddingTop="20dp"
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/a"
-            android:text="Event Name:" />
+            android:paddingLeft="20dp"
+            android:text="Event Name:  "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvEventName"
@@ -34,14 +41,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/a"
             android:layout_toRightOf="@+id/b"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/b"
-            android:text="Location:" />
+            android:paddingLeft="20dp"
+            android:text="Location:        "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvLocation"
@@ -49,14 +59,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/b"
             android:layout_toRightOf="@+id/c"
-            android:text=" " />
-        
+            android:text="item"
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/c"
-            android:text="Date:" />
+            android:paddingLeft="20dp"
+            android:text="Date:                "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvEventDate"
@@ -64,14 +77,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/c"
             android:layout_toRightOf="@+id/d"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/e"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/d"
-            android:text="Time:" />
+            android:paddingLeft="20dp"
+            android:text="Time:               "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvEventTime"
@@ -79,14 +95,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/d"
             android:layout_toRightOf="@+id/e"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/e"
-            android:text="Notes:" />
+            android:paddingLeft="20dp"
+            android:text="Notes:  "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvNotes"
@@ -94,7 +113,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/e"
             android:layout_toRightOf="@+id/f"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
     </RelativeLayout>
 
     <RelativeLayout

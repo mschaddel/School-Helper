@@ -1,7 +1,5 @@
 package com.capstone.schoolhelper;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -10,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -89,8 +86,14 @@ public class AddClassFrag extends Fragment {
 					Fragment fragment = new ClassesMenuFrag();
 					// Insert the fragment by replacing any existing fragment
 					FragmentManager fragmentManager = getFragmentManager();
+					fragmentManager.popBackStack();
+					fragmentManager.popBackStack();
+					fragmentManager.popBackStack();
+					fragmentManager.popBackStack();
+
 					fragmentManager.beginTransaction()
-							.replace(R.id.content_frame, fragment).commit();
+							.replace(R.id.content_frame, fragment)
+							.addToBackStack(null).commit();
 				} else {
 				}
 			}

@@ -31,8 +31,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_NAME = "name";
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_SCHOOL = "school";
-	private static final String KEY_NOTIFICATIONS = "notifications";
-	private static final String KEY_MODE = "mode";
 	// Class Fields
 	private static final String KEY_CLASSID = "class_id";
 	private static final String KEY_PROFESSOR = "professor";
@@ -57,8 +55,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 
 	private static final String CREATE_PROFILE_TABLE = "CREATE TABLE "
 			+ TABLE_PROFILE + "(" + KEY_PROFILEID + " INTEGER PRIMARY KEY,"
-			+ KEY_NAME + " TEXT," + KEY_EMAIL + " TEXT," + KEY_SCHOOL
-			+ " TEXT," + KEY_NOTIFICATIONS + " INTEGER," + KEY_MODE + " TEXT"
+			+ KEY_NAME + " TEXT," + KEY_EMAIL + " TEXT," + KEY_SCHOOL + " TEXT"
 			+ ")";
 
 	private static final String CREATE_CLASS_TABLE = "CREATE TABLE "
@@ -110,8 +107,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_NAME, profile.getname());
 		values.put(KEY_EMAIL, profile.getemail());
 		values.put(KEY_SCHOOL, profile.getschool());
-		values.put(KEY_NOTIFICATIONS, profile.getnotifications());
-		values.put(KEY_MODE, profile.getmode());
 
 		long profile_id = db.insert(TABLE_PROFILE, null, values);
 
@@ -133,29 +128,25 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all profile
-	public List<SQLProfile> getProfile() {
-		List<SQLProfile> profile = new ArrayList<SQLProfile>();
+	public List<String> getProfile() {
+		List<String> profile = new ArrayList<String>();
 
 		String Query = "SELECT * FROM " + TABLE_PROFILE;
 
-		SQLiteDatabase db = this.getReadableDatabase();
+		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor c = db.rawQuery(Query, null);
 		if (c.moveToFirst()) {
 			do {
-				SQLProfile np = new SQLProfile();
-				np.setname(c.getString(c.getColumnIndex(KEY_NAME)));
-				np.setemail(c.getString(c.getColumnIndex(KEY_EMAIL)));
-				np.setschool(c.getString(c.getColumnIndex(KEY_SCHOOL)));
-				np.setmode(c.getString(c.getColumnIndex(KEY_MODE)));
-				np.setnotifications(c.getInt(c
-						.getColumnIndex(KEY_NOTIFICATIONS)));
+				profile.add(String.valueOf(c.getLong(c.getColumnIndex(KEY_PROFILEID))));
+				profile.add(c.getString(c.getColumnIndex(KEY_NAME)));
+				profile.add(c.getString(c.getColumnIndex(KEY_EMAIL)));
+				profile.add(c.getString(c.getColumnIndex(KEY_SCHOOL)));
 
-				// adding to profile list
-				profile.add(np);
 			} while (c.moveToNext());
 		}
 		return profile;
 	}
+	
 
 	// delete profile
 	public void deleteProfile(long profile_id) {

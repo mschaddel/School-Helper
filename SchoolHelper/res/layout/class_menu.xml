@@ -12,21 +12,28 @@
             android:id="@+id/a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ClassName:" />
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="Class Name: "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvClassName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/a"
-            android:text="" />
+            android:paddingTop="20dp"
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/a"
-            android:text="ProfName:" />
+            android:paddingLeft="20dp"
+            android:text="Professor:     "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvProfName"
@@ -34,14 +41,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/a"
             android:layout_toRightOf="@+id/b"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/b"
-            android:text="ClassLoc:" />
+            android:paddingLeft="20dp"
+            android:text="Location:       "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvClassLoc"
@@ -49,14 +59,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/b"
             android:layout_toRightOf="@+id/c"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/c"
-            android:text="ClassTime:" />
+            android:paddingLeft="20dp"
+            android:text="Class Time:  "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvClassTime"
@@ -64,14 +77,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/c"
             android:layout_toRightOf="@+id/d"
-            android:text=" " />
-        
-         <TextView
+            android:text="item"
+            android:textSize="20dp" />
+
+        <TextView
             android:id="@+id/e"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/d"
-            android:text="ClassDays:" />
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:text="Class Days:  "
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvClassDays"
@@ -79,7 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/d"
             android:layout_toRightOf="@+id/e"
-            android:text=" " />
+            android:text="item"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btnAddEvent"
@@ -92,10 +110,8 @@
     <ListView
         android:id="@+id/lvEvents"
         android:layout_width="wrap_content"
-        android:layout_height="250dp" 
-        android:clickable="true"
-
-        >
+        android:layout_height="180dp"
+        android:clickable="true" >
     </ListView>
 
     <RelativeLayout

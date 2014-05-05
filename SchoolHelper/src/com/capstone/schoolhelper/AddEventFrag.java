@@ -66,8 +66,9 @@ public class AddEventFrag extends Fragment {
 								.equals("Press above button.")) {
 					SQLHandler db = new SQLHandler(getActivity()
 							.getApplicationContext());
-					SQLEvent c = new SQLEvent(eventName, className, location,
-							tvDate.getText().toString(), tvTime.getText()
+					SQLEvent c = new SQLEvent(eventName,
+							ClassesMenuFrag.currentClass, location, tvDate
+									.getText().toString(), tvTime.getText()
 									.toString(), "No Comments", "No documents");
 					db.createEvent(c);
 
@@ -93,50 +94,18 @@ public class AddEventFrag extends Fragment {
 
 						// Check next event and set notifications
 						List<SQLEvent> events = db.getEventNames();
-						boolean newest = true;
-//						for (int x = 0; x < events.size(); x++) {
-//
-//							String[] testDate = events.get(x).geteventdate()
-//									.split("-");
-//							String[] testTime = events.get(x).geteventtime()
-//									.split(":");
-//
-//							Calendar testeDate = Calendar.getInstance();
-//							testeDate.set(Integer.parseInt(testDate[2]),
-//									Integer.parseInt(testDate[0]),
-//									Integer.parseInt(testDate[1]),
-//									Integer.parseInt(testTime[0]),
-//									Integer.parseInt(testTime[1]));
-//
-//							if (testeDate.before(currenteDate)) {
-//								newest = false;
-//							}
-//
-//						}
-
-						if (newest) {
-							closestEventName = eventName;
-							closestEventTime = tvTime.getText().toString();
-							Intent myIntent = new Intent(getActivity(),
-									AlarmReceiver.class);
-							AlarmManager alarmManager = (AlarmManager) getActivity()
-									.getSystemService(Context.ALARM_SERVICE);
-							PendingIntent pendingIntent = PendingIntent
-									.getBroadcast(getActivity()
-											.getApplicationContext(), 0,
-											myIntent, 0);
-							alarmManager.set(AlarmManager.RTC_WAKEUP, time,
-									pendingIntent);
-							System.out.println("TESTING:          "
-									+ currenteDate
-									+ "/n/n"
-									+ +currenteDate.getTimeInMillis()
-									+ "   "
-									+ System.currentTimeMillis()
-									+ "  "
-									+ (currenteDate.getTimeInMillis() - System
-											.currentTimeMillis()));
-						}
+						closestEventName = eventName;
+						closestEventTime = tvTime.getText().toString();
+						Intent myIntent = new Intent(getActivity(),
+								AlarmReceiver.class);
+						AlarmManager alarmManager = (AlarmManager) getActivity()
+								.getSystemService(Context.ALARM_SERVICE);
+						PendingIntent pendingIntent = PendingIntent
+								.getBroadcast(getActivity()
+										.getApplicationContext(), 0, myIntent,
+										0);
+						alarmManager.set(AlarmManager.RTC_WAKEUP, time,
+								pendingIntent);
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -147,13 +116,15 @@ public class AddEventFrag extends Fragment {
 					Fragment fragment = new ClassMenuFrag();
 					// Insert the fragment by replacing any existing fragment
 					FragmentManager fragmentManager = getFragmentManager();
+					fragmentManager.popBackStack();
+					fragmentManager.popBackStack();
 					fragmentManager.beginTransaction()
-							.replace(R.id.content_frame, fragment).commit();
+							.replace(R.id.content_frame, fragment)
+							.addToBackStack(null).commit();
 				} else {
 
 				}
 			}
-
 		});
 
 		Button btnChangeDate = (Button) view.findViewById(R.id.btnChangeDate);

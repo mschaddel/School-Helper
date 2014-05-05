@@ -1,40 +1,19 @@
 package com.capstone.schoolhelper;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import com.lamerman.FileDialog;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.VideoView;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.database.sqlite.SQLiteException;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ClassMenuFrag extends Fragment {
 
@@ -75,7 +54,8 @@ public class ClassMenuFrag extends Fragment {
 				Fragment fragment = new EventFrag();
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment)
+						.addToBackStack(null).commit();
 			}
 		});
 
@@ -90,7 +70,23 @@ public class ClassMenuFrag extends Fragment {
 		TextView tvClassTime = (TextView) view.findViewById(R.id.tvClassTime);
 		tvClassTime.setText(sqlClass.get(3));
 		TextView tvClassDays = (TextView) view.findViewById(R.id.tvClassDays);
-		tvClassDays.setText(sqlClass.get(4));
+		String days = "";
+		if (sqlClass.get(4).contains("2")){
+			days.concat("M ");
+		}
+		if (sqlClass.get(4).contains("3")){
+			days.concat("T ");
+		}
+		if (sqlClass.get(4).contains("4")){
+			days.concat("W ");
+		}
+		if (sqlClass.get(4).contains("5")){
+			days.concat("R ");
+		}
+		if (sqlClass.get(4).contains("6")){
+			days.concat("F ");
+		}
+		tvClassDays.setText(days);
 
 		Button btnAddEvent = (Button) view.findViewById(R.id.btnAddEvent);
 		btnAddEvent.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +98,8 @@ public class ClassMenuFrag extends Fragment {
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment)
+						.addToBackStack(null).commit();
 			}
 
 		});
@@ -132,8 +129,12 @@ public class ClassMenuFrag extends Fragment {
 				Fragment fragment = new ClassesMenuFrag();
 				// Insert the fragment by replacing any existing fragment
 				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.popBackStack();
+				fragmentManager.popBackStack();
+
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment)
+						.addToBackStack(null).commit();
 			}
 		});
 
@@ -151,16 +152,6 @@ public class ClassMenuFrag extends Fragment {
 
 		return view;
 
-	}
-
-	public void onBackPressed() {
-		// create a new fragment and specify the planet to show based on
-		// position
-		Fragment fragment = new ClassesMenuFrag();
-		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
 	}
 
 }
