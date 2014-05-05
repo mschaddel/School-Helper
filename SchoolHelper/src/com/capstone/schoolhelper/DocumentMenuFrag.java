@@ -38,7 +38,7 @@ public class DocumentMenuFrag extends Fragment {
 					allClassesArray);
 
 			lvDocs.setAdapter(adapter);
-
+			lvDocs.setClickable(true);
 			lvDocs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				public void onItemClick(AdapterView parent, View v,
 						int position, long id) {
@@ -51,6 +51,13 @@ public class DocumentMenuFrag extends Fragment {
 							.addToBackStack(null).commit();
 				}
 			});
+		}
+		else{
+			String[] lvItems = { "No Classes" };
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+					android.R.layout.simple_list_item_1, lvItems);
+			lvDocs.setAdapter(adapter);
+			lvDocs.setClickable(false);
 		}
 		return view;
 	}

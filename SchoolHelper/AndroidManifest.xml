@@ -40,8 +40,8 @@
             android:name="com.capstone.schoolhelper.TransitionDialog"
             android:screenOrientation="portrait" >
         </activity>
-        <receiver
-            android:name="com.capstone.schoolhelper.AlarmReceiver">
+
+        <receiver android:name="com.capstone.schoolhelper.AlarmReceiver" >
         </receiver>
     </application>
 

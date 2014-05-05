@@ -25,6 +25,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String TABLE_PROFILE = "profile";
 	private static final String TABLE_CLASS = "class";
 	private static final String TABLE_EVENT = "event";
+	private static final String TABLE_DOC = "documents";
 	// Profile fields
 	private static final String KEY_PROFILEID = "profile_id";
 	private static final String KEY_NAME = "name";
@@ -38,7 +39,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_CLASS_DOCUMENTS = "documents";
 	private static final String KEY_CLASS_NAME = "class_name";
 	private static final String KEY_DAYS = "class_days";
-
 	// Event Fields
 	private static final String KEY_EVENTID = "event_id";
 	private static final String KEY_EVENT_NAME = "event_name";
@@ -48,6 +48,10 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_EVENT_TIME = "event_time";
 	private static final String KEY_DESCRIPTION = "description";
 	private static final String KEY_EVENT_DOCUMENTS = "event_documents";
+	// Doc Fields
+	private static final String KEY_DOCID = "doc_id";
+	private static final String KEY_DOC_CLASS_ID = "doc_class_id";
+	private static final String KEY_DOC_NAME = "doc_name";
 
 	private static final String CREATE_PROFILE_TABLE = "CREATE TABLE "
 			+ TABLE_PROFILE + "(" + KEY_PROFILEID + " INTEGER PRIMARY KEY,"
@@ -67,6 +71,10 @@ public class SQLHandler extends SQLiteOpenHelper {
 			+ KEY_EVENT_TIME + " TEXT," + KEY_DESCRIPTION + " TEXT,"
 			+ KEY_EVENT_DOCUMENTS + " TEXT" + ")";
 
+	private static final String CREATE_DOC_TABLE = "CREATE TABLE " + TABLE_DOC
+			+ "(" + KEY_DOCID + " INTEGER PRIMARY KEY," + KEY_DOC_CLASS_ID
+			+ " INTEGER," + KEY_DOC_NAME + " TEXT" + ")";
+
 	public SQLHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -76,6 +84,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_PROFILE_TABLE);
 		db.execSQL(CREATE_CLASS_TABLE);
 		db.execSQL(CREATE_EVENT_TABLE);
+		db.execSQL(CREATE_DOC_TABLE);
 
 	}
 
@@ -84,6 +93,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROFILE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLASS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENT);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOC);
 
 		// create new tables
 		onCreate(db);
@@ -245,7 +255,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		}
 		return event;
 	}
-
 	// get all events for a Date
 	public List<SQLEvent> getallEventsDate(String date) {
 		List<SQLEvent> event = new ArrayList<SQLEvent>();
@@ -462,4 +471,52 @@ public class SQLHandler extends SQLiteOpenHelper {
 				new String[] { String.valueOf(class_id) });
 	}
 
+	// create doc
+	public long createDoc(SQLDoc doc) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(KEY_DOC_CLASS_ID, doc.getclassid());
+		values.put(KEY_DOC_NAME, doc.getdocname());
+
+		long doc_id = db.insert(TABLE_DOC, null, values);
+
+		return doc_id;
+	}
+
+	// find docs for a class
+	public List<String> getClassDocuments(long class_id) {
+		List<String> classDocs = new ArrayList<String>();
+		String Query = "SELECT doc_name FROM " + TABLE_DOC + " WHERE "
+				+ KEY_DOC_CLASS_ID + " = '" + class_id + "'";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(Query, null);
+		if (c.moveToFirst()) {
+			do {
+				classDocs.add(c.getString(c.getColumnIndex(KEY_DOC_NAME)));
+			} while (c.moveToNext());
+		}
+		return classDocs;
+	}
+	
+	public List<Long> getClassDocumentsID(long class_id) {
+		List<Long> classDocsID = new ArrayList<Long>();
+		String Query = "SELECT doc_id FROM " + TABLE_DOC + " WHERE "
+				+ KEY_DOC_CLASS_ID + " = '" + class_id + "'";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(Query, null);
+		if (c.moveToFirst()) {
+			do {
+				classDocsID.add(c.getLong(c.getColumnIndex(KEY_DOCID)));
+			} while (c.moveToNext());
+		}
+		return classDocsID;
+	}
+
+	public void deleteDoc(long doc_id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_DOC, KEY_DOCID + " = ?",
+				new String[] { String.valueOf(doc_id) });
+	}
 }

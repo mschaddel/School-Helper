@@ -93,6 +93,20 @@ public class ClassMenuFrag extends Fragment {
 
 			public void onClick(View arg0) {
 				SQLHandler db = new SQLHandler(getActivity());
+				List<Long> classDocs = db
+						.getClassDocumentsID(ClassesMenuFrag.currentClassID);
+				List<Long> classEvents = db
+						.getallEventsClassID(ClassesMenuFrag.currentClass);
+				if (!classDocs.isEmpty()) {
+					for (int i = 0; i < classDocs.size(); i++) {
+						db.deleteDoc(classDocs.get(i));
+					}
+				}
+				if (!classEvents.isEmpty()) {
+					for (int i = 0; i < classEvents.size(); i++) {
+						db.deleteEvent(classEvents.get(i));
+					}
+				}
 				db.deleteClass(ClassesMenuFrag.currentClassID);
 				// create a new fragment and specify the planet to show based on
 				// position
@@ -112,6 +126,7 @@ public class ClassMenuFrag extends Fragment {
 		btnAddDoc.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
+				MainActivity.docvieworclassmenu = true;
 				Intent intent = new Intent(getActivity(),
 						TransitionDialog.class);
 				startActivity(intent);
