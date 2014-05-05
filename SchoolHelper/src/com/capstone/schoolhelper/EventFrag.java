@@ -38,7 +38,7 @@ public class EventFrag extends Fragment {
 		TextView tvEventTime = (TextView) view.findViewById(R.id.tvEventTime);
 		tvEventTime.setText(event.get(4));
 		TextView tvNotes = (TextView) view.findViewById(R.id.tvNotes);
-		tvNotes.setText(event.get(6));
+		tvNotes.setText(event.get(5));
 
 		Button btnDeleteEvent = (Button) view.findViewById(R.id.btnDeleteEvent);
 		btnDeleteEvent.setOnClickListener(new View.OnClickListener() {

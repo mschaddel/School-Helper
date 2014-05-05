@@ -70,7 +70,23 @@ public class ClassMenuFrag extends Fragment {
 		TextView tvClassTime = (TextView) view.findViewById(R.id.tvClassTime);
 		tvClassTime.setText(sqlClass.get(3));
 		TextView tvClassDays = (TextView) view.findViewById(R.id.tvClassDays);
-		tvClassDays.setText(sqlClass.get(4));
+		String days = "";
+		if (sqlClass.get(4).contains("2")){
+			days.concat("M ");
+		}
+		if (sqlClass.get(4).contains("3")){
+			days.concat("T ");
+		}
+		if (sqlClass.get(4).contains("4")){
+			days.concat("W ");
+		}
+		if (sqlClass.get(4).contains("5")){
+			days.concat("R ");
+		}
+		if (sqlClass.get(4).contains("6")){
+			days.concat("F ");
+		}
+		tvClassDays.setText(days);
 
 		Button btnAddEvent = (Button) view.findViewById(R.id.btnAddEvent);
 		btnAddEvent.setOnClickListener(new View.OnClickListener() {

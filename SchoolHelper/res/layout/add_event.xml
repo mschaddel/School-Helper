@@ -118,17 +118,10 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/btnAddDoc"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Add Document" />
-
-            <Button
                 android:id="@+id/btnAddEvent"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:text="Add Event" />
         </RelativeLayout>
     </LinearLayout>
