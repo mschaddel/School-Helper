@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class DocumentViewFrag extends Fragment {
 					this.getActivity(), android.R.layout.simple_list_item_1,
 					allDocsArray);
 			lvListDocs.setAdapter(adapter);
-
+			lvListDocs.setClickable(true);
 			lvListDocs
 					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 						public void onItemClick(AdapterView parent, View v,
@@ -63,22 +64,24 @@ public class DocumentViewFrag extends Fragment {
 						}
 					});
 		} else {
-			String[] lvItems = { "No Documents. Click to Add a Document." };
+			String[] lvItems = { "No Documents." };
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 					this.getActivity(), android.R.layout.simple_list_item_1,
 					lvItems);
 			lvListDocs.setAdapter(adapter);
-			lvListDocs
-					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-						public void onItemClick(AdapterView parent, View v,
-								int position, long id) {
-							MainActivity.docvieworclassmenu = false;
-							Intent intent = new Intent(getActivity(),
-									TransitionDialog.class);
-							startActivity(intent);
-						}
-					});
+			lvListDocs.setClickable(false);
 		}
+		Button btnAddDoc = (Button) view.findViewById(R.id.addDoc);
+
+		btnAddDoc.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View arg0) {
+				MainActivity.docvieworclassmenu = false;
+				Intent intent = new Intent(getActivity(),
+						TransitionDialog.class);
+				startActivity(intent);
+			}
+		});
 		return view;
 	}
 }
