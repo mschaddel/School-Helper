@@ -25,7 +25,7 @@ public class DocumentMenuFrag extends Fragment {
 		ListView lvDocs = (ListView) view.findViewById(R.id.lvDocs);
 
 		List<String> allClassesNames = db.getClassNames();
-		List<Long> allClassesId = db.getClassIds();
+		List<Long> allClassesId = db.getClassIDs();
 
 		if (!allClassesNames.isEmpty()) {
 			final String[] allClassesArray = allClassesNames

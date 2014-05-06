@@ -27,7 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SimpleFileDialog extends TransitionDialog {
+public class SimpleFileDialog extends TransitionActivity {
 	private int FileOpen = 0;
 	private int FileSave = 1;
 	private int FolderChoose = 2;
@@ -152,14 +152,14 @@ public class SimpleFileDialog extends TransitionDialog {
 							m_SimpleFileDialogListener.onChosenDir(m_dir);
 						}
 					}
-					((TransitionDialog) m_context).finish();
+					((TransitionActivity) m_context).finish();
 				}
 
 			}
 		}).setNegativeButton("Cancel", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				((TransitionDialog) m_context).finish();
+				((TransitionActivity) m_context).finish();
 			}
 		});
 

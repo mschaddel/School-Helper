@@ -216,7 +216,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all events for a class
-	public List<String> getallEventsClass(String class_name) {
+	public List<String> getAllEventsClass(String class_name) {
 		List<String> event = new ArrayList<String>();
 
 		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
@@ -234,7 +234,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all events for a class
-	public List<Long> getallEventsClassID(String class_name) {
+	public List<Long> getAllEventsClassID(String class_name) {
 		List<Long> event = new ArrayList<Long>();
 
 		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
@@ -251,7 +251,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		return event;
 	}
 	// get all events for a Date
-	public List<SQLEvent> getallEventsDate(String date) {
+	public List<SQLEvent> getAllEventsDate(String date) {
 		List<SQLEvent> event = new ArrayList<SQLEvent>();
 
 		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
@@ -273,7 +273,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all events for a Date
-	public List<Long> getallEventsDateIds(String date) {
+	public List<Long> getAllEventsDateID(String date) {
 		List<Long> event = new ArrayList<Long>();
 
 		String Query = "SELECT * FROM " + TABLE_EVENT + " WHERE "
@@ -347,7 +347,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// get all class ids
-	public List<Long> getClassIds() {
+	public List<Long> getClassIDs() {
 		List<Long> class_ids = new ArrayList<Long>();
 
 		String Query = "SELECT class_id FROM " + TABLE_CLASS;
@@ -449,7 +449,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 	}
 
 	// find docs for a class
-	public List<String> getClassDocuments(long class_id) {
+	public List<String> getClassDocs(long class_id) {
 		List<String> classDocs = new ArrayList<String>();
 		String Query = "SELECT doc_name FROM " + TABLE_DOC + " WHERE "
 				+ KEY_DOC_CLASS_ID + " = '" + class_id + "'";
@@ -464,7 +464,7 @@ public class SQLHandler extends SQLiteOpenHelper {
 		return classDocs;
 	}
 	
-	public List<Long> getClassDocumentsID(long class_id) {
+	public List<Long> getClassDocsID(long class_id) {
 		List<Long> classDocsID = new ArrayList<Long>();
 		String Query = "SELECT doc_id FROM " + TABLE_DOC + " WHERE "
 				+ KEY_DOC_CLASS_ID + " = '" + class_id + "'";

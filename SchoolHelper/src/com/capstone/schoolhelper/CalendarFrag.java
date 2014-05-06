@@ -37,9 +37,9 @@ public class CalendarFrag extends Fragment {
 
 		SQLHandler db = new SQLHandler(getActivity());
 
-		final List<SQLEvent> events = db.getallEventsDate(formattedDate);
+		final List<SQLEvent> events = db.getAllEventsDate(formattedDate);
 		final String[] eventNameDate = new String[events.size()];
-		List<Long> eventsIds = db.getallEventsDateIds(formattedDate);
+		List<Long> eventsIds = db.getAllEventsDateID(formattedDate);
 		final Long[] eventNameDateIds = eventsIds.toArray(new Long[eventsIds
 				.size()]);
 
@@ -88,10 +88,10 @@ public class CalendarFrag extends Fragment {
 				SQLHandler db = new SQLHandler(getActivity());
 
 				final List<SQLEvent> events = db
-						.getallEventsDate(formattedDate);
+						.getAllEventsDate(formattedDate);
 				final String[] eventNameDate = new String[events.size()];
 
-				List<Long> eventsIds = db.getallEventsDateIds(formattedDate);
+				List<Long> eventsIds = db.getAllEventsDateID(formattedDate);
 				final Long[] eventNameDateIds = eventsIds
 						.toArray(new Long[eventsIds.size()]);
 
