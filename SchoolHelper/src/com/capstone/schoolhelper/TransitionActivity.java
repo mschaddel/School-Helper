@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class TransitionDialog extends Activity {
+public class TransitionActivity extends Activity {
 	public static String m_chosen;
 	SQLDoc doc;
 	protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class TransitionDialog extends Activity {
 		setContentView(R.layout.class_menu);
 
 		SimpleFileDialog FileOpenDialog = new SimpleFileDialog(
-				TransitionDialog.this, "FileOpen",
+				TransitionActivity.this, "FileOpen",
 				new SimpleFileDialog.SimpleFileDialogListener() {
 
 					@Override
@@ -34,7 +34,7 @@ public class TransitionDialog extends Activity {
 						}
 						db.createDoc(doc);
 						// db.addDocument(id, m_chosen);
-						Toast.makeText(TransitionDialog.this,
+						Toast.makeText(TransitionActivity.this,
 								"Chosen FileOpenDialog File: " + m_chosen,
 								Toast.LENGTH_LONG).show();
 					}

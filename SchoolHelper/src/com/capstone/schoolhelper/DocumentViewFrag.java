@@ -27,7 +27,7 @@ public class DocumentViewFrag extends Fragment {
 		SQLHandler db = new SQLHandler(this.getActivity());
 		ListView lvListDocs = (ListView) view.findViewById(R.id.lvListDocs);
 		List<String> allDocNames = db
-				.getClassDocuments(DocumentMenuFrag.docCurrentClassID);
+				.getClassDocs(DocumentMenuFrag.docCurrentClassID);
 		if (!allDocNames.isEmpty()) {
 			final String[] allDocsArray = allDocNames
 					.toArray(new String[allDocNames.size()]);
@@ -70,7 +70,9 @@ public class DocumentViewFrag extends Fragment {
 					lvItems);
 			lvListDocs.setAdapter(adapter);
 			lvListDocs.setClickable(false);
+
 		}
+
 		Button btnAddDoc = (Button) view.findViewById(R.id.addDoc);
 
 		btnAddDoc.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +80,7 @@ public class DocumentViewFrag extends Fragment {
 			public void onClick(View arg0) {
 				MainActivity.docvieworclassmenu = false;
 				Intent intent = new Intent(getActivity(),
-						TransitionDialog.class);
+						TransitionActivity.class);
 				startActivity(intent);
 			}
 		});
