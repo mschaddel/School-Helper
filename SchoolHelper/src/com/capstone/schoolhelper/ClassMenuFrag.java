@@ -31,9 +31,9 @@ public class ClassMenuFrag extends Fragment {
 		SQLHandler db = new SQLHandler(this.getActivity());
 		ListView lvEvents = (ListView) view.findViewById(R.id.lvEvents);
 		List<String> allEventNames = db
-				.getallEventsClass(ClassesMenuFrag.currentClass);
+				.getAllEventsClass(ClassesMenuFrag.currentClass);
 		List<Long> allEventNamesIds = db
-				.getallEventsClassID(ClassesMenuFrag.currentClass);
+				.getAllEventsClassID(ClassesMenuFrag.currentClass);
 
 		final String[] allEventArray = allEventNames
 				.toArray(new String[allEventNames.size()]);
@@ -110,9 +110,9 @@ public class ClassMenuFrag extends Fragment {
 			public void onClick(View arg0) {
 				SQLHandler db = new SQLHandler(getActivity());
 				List<Long> classDocs = db
-						.getClassDocumentsID(ClassesMenuFrag.currentClassID);
+						.getClassDocsID(ClassesMenuFrag.currentClassID);
 				List<Long> classEvents = db
-						.getallEventsClassID(ClassesMenuFrag.currentClass);
+						.getAllEventsClassID(ClassesMenuFrag.currentClass);
 				if (!classDocs.isEmpty()) {
 					for (int i = 0; i < classDocs.size(); i++) {
 						db.deleteDoc(classDocs.get(i));
@@ -144,7 +144,7 @@ public class ClassMenuFrag extends Fragment {
 			public void onClick(View arg0) {
 				MainActivity.docvieworclassmenu = true;
 				Intent intent = new Intent(getActivity(),
-						TransitionDialog.class);
+						TransitionActivity.class);
 				startActivity(intent);
 			}
 

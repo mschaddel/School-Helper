@@ -28,7 +28,7 @@ public class ClassesMenuFrag extends Fragment {
 		ListView lvClasses = (ListView) view.findViewById(R.id.lvClasses);
 
 		List<String> allClassesNames = db.getClassNames();
-		List<Long> allClassesId = db.getClassIds();
+		List<Long> allClassesId = db.getClassIDs();
 
 		if (!allClassesNames.isEmpty()) {
 			final String[] allClassesArray = allClassesNames

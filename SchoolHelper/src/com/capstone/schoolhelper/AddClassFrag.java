@@ -73,9 +73,7 @@ public class AddClassFrag extends Fragment {
 						&& !school.isEmpty()
 						&& !tvTime.getText().toString()
 								.equals("Press above button.")
-						&& !days.isEmpty()
-						&& !tvTime.getText().toString()
-								.equals("Press above button.")) {
+						&& !days.isEmpty()) {
 
 					SQLHandler db = new SQLHandler(getActivity()
 							.getApplicationContext());
