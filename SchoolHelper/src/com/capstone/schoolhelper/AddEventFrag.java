@@ -26,8 +26,10 @@ public class AddEventFrag extends Fragment {
 	static final int DATE_DIALOG_ID = 999;
 	static public TextView tvDate;
 	static public TextView tvTime;
+	static public EditText etNotes;
 	static public String closestEventName;
 	static public String closestEventTime;
+	static public String notes;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +48,7 @@ public class AddEventFrag extends Fragment {
 				.findViewById(R.id.etLocation);
 		tvDate = (TextView) view.findViewById(R.id.tvDate);
 		tvTime = (TextView) view.findViewById(R.id.tvTime);
+		etNotes = (EditText) view.findViewById(R.id.etNotes);
 
 		Button btnAddDoc = (Button) view.findViewById(R.id.btnAddDoc);
 		Button btnAddEvent = (Button) view.findViewById(R.id.btnAddEvent);
@@ -66,10 +69,16 @@ public class AddEventFrag extends Fragment {
 								.equals("Press above button.")) {
 					SQLHandler db = new SQLHandler(getActivity()
 							.getApplicationContext());
+					if (etNotes.getText().toString().isEmpty()){
+						notes = "None";
+					}
+					else {
+						notes = etNotes.getText().toString();
+					}
 					SQLEvent c = new SQLEvent(eventName,
 							ClassesMenuFrag.currentClass, location, tvDate
 									.getText().toString(), tvTime.getText()
-									.toString(), "No Comments", "No documents");
+									.toString(), notes);
 					db.createEvent(c);
 
 					String[] currentDate = tvDate.getText().toString()
