@@ -8,23 +8,21 @@ public class SQLEvent {
 	String event_date;
 	String event_time;
 	String description;
-	String event_documents;
 	
 	public SQLEvent(){
 		
 	}
 	
-	public SQLEvent(String event_name, String class_name, String event_location, String event_date,String event_time, String description, String event_documents){
+	public SQLEvent(String event_name, String class_name, String event_location, String event_date,String event_time, String description){
 		this.event_name = event_name;
 		this.class_name = class_name;
 		this.event_location = event_location;
 		this.event_date = event_date;
 		this.event_time = event_time;
 		this.description = description;
-		this.event_documents = event_documents;
 	}
 	
-	public SQLEvent(int event_id, String event_name, String class_name, String event_location, String event_date,String event_time, String description, String event_documents){
+	public SQLEvent(int event_id, String event_name, String class_name, String event_location, String event_date,String event_time, String description){
 		this.event_id = event_id;
 		this.event_name = event_name;
 		this.class_name = class_name;
@@ -32,7 +30,6 @@ public class SQLEvent {
 		this.event_date = event_date;
 		this.event_time = event_time;
 		this.description = description;
-		this.event_documents = event_documents;
 	}
 	public long geteventid(){
 		return this.event_id;
@@ -90,11 +87,4 @@ public class SQLEvent {
 		this.description = description;
 	}
 	
-	public String geteventdocuments(){
-		return this.event_documents;
-	}
-	
-	public void seteventdocuments(String event_documents){
-		this.event_documents = event_documents;
-	}
 }

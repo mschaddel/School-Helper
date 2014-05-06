@@ -81,7 +81,7 @@ public class AddClassFrag extends Fragment {
 							.getApplicationContext());
 
 					SQLClass c = new SQLClass(className, profName, school,
-							tvTime.getText().toString(), days, "No Documents");
+							tvTime.getText().toString(), days);
 					db.createClass(c);
 					Fragment fragment = new ClassesMenuFrag();
 					// Insert the fragment by replacing any existing fragment

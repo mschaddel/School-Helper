@@ -42,16 +42,23 @@ public class MainActivity extends Activity {
 		// Check if profile has been created
 		if (profile.isEmpty()) {
 			fragment = new ProfileCreatorFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).addToBackStack(null)
+					.commit();
+
 		} else {
 			fragment = new MainFrag();
+			// Insert the fragment by replacing any existing fragment
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment)
+					.commit();
+
 		}
 
-		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).addToBackStack(null)
-				.commit();
-
+		
 		getActionBar().setTitle("EduTech");
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);

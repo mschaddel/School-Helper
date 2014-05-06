@@ -7,29 +7,26 @@ public class SQLClass {
 	String location;
 	String class_time;
 	String days;
-	String documents;
 	
 	public SQLClass(){
 		
 	}
 	
-	public SQLClass(String class_name, String professor, String location, String class_time, String days, String documents){
+	public SQLClass(String class_name, String professor, String location, String class_time, String days){
 		this.class_name = class_name;
 		this.professor = professor;
 		this.location = location;
 		this.class_time = class_time;
 		this.days = days;
-		this.documents = documents;
 	}
 	
-	public SQLClass(int class_id, String class_name, String professor, String location, String class_time, String days, String documents){
+	public SQLClass(int class_id, String class_name, String professor, String location, String class_time, String days){
 		this.class_id = class_id;
 		this.class_name = class_name;
 		this.professor = professor;
 		this.location = location;
 		this.class_time = class_time;
 		this.days = days;
-		this.documents = documents;
 	}
 	
 	public long getclassid(){
@@ -80,13 +77,6 @@ public class SQLClass {
 		this.days = days;
 	}
 	
-	public String getclassdocuments(){
-		return this.documents;
-	}
-	
-	public void setclassdocuments(String documents){
-		this.documents = documents;
-	}
 	
 	
 }

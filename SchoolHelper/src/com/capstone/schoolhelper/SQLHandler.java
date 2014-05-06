@@ -36,7 +36,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_PROFESSOR = "professor";
 	private static final String KEY_CLASS_LOCATION = "location";
 	private static final String KEY_CLASS_TIME = "class_time";
-	private static final String KEY_CLASS_DOCUMENTS = "documents";
 	private static final String KEY_CLASS_NAME = "class_name";
 	private static final String KEY_DAYS = "class_days";
 	// Event Fields
@@ -47,7 +46,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 	private static final String KEY_EVENT_DATE = "event_date";
 	private static final String KEY_EVENT_TIME = "event_time";
 	private static final String KEY_DESCRIPTION = "description";
-	private static final String KEY_EVENT_DOCUMENTS = "event_documents";
 	// Doc Fields
 	private static final String KEY_DOCID = "doc_id";
 	private static final String KEY_DOC_CLASS_ID = "doc_class_id";
@@ -62,14 +60,13 @@ public class SQLHandler extends SQLiteOpenHelper {
 			+ TABLE_CLASS + "(" + KEY_CLASSID + " INTEGER PRIMARY KEY,"
 			+ KEY_CLASS_NAME + " TEXT," + KEY_PROFESSOR + " TEXT,"
 			+ KEY_CLASS_LOCATION + " TEXT," + KEY_CLASS_TIME + " TEXT,"
-			+ KEY_DAYS + " TEXT," + KEY_CLASS_DOCUMENTS + " TEXT" + ")";
+			+ KEY_DAYS + " TEXT" + ")";
 
 	private static final String CREATE_EVENT_TABLE = "CREATE TABLE "
 			+ TABLE_EVENT + "(" + KEY_EVENTID + " INTEGER PRIMARY KEY,"
 			+ KEY_EVENT_NAME + " TEXT," + KEY_EVENT_CLASS_NAME + " TEXT,"
 			+ KEY_EVENT_LOCATION + " TEXT," + KEY_EVENT_DATE + " TEXT,"
-			+ KEY_EVENT_TIME + " TEXT," + KEY_DESCRIPTION + " TEXT,"
-			+ KEY_EVENT_DOCUMENTS + " TEXT" + ")";
+			+ KEY_EVENT_TIME + " TEXT," + KEY_DESCRIPTION + " TEXT" + ")";
 
 	private static final String CREATE_DOC_TABLE = "CREATE TABLE " + TABLE_DOC
 			+ "(" + KEY_DOCID + " INTEGER PRIMARY KEY," + KEY_DOC_CLASS_ID
@@ -167,7 +164,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_EVENT_DATE, event.geteventdate());
 		values.put(KEY_EVENT_TIME, event.geteventtime());
 		values.put(KEY_DESCRIPTION, event.getdescription());
-		values.put(KEY_EVENT_DOCUMENTS, event.geteventdocuments());
 
 		long event_id = db.insert(TABLE_EVENT, null, values);
 
@@ -191,7 +187,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 				event.add(c.getString(c.getColumnIndex(KEY_EVENT_DATE)));
 				event.add(c.getString(c.getColumnIndex(KEY_EVENT_TIME)));
 				event.add(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
-				event.add(c.getString(c.getColumnIndex(KEY_EVENT_DOCUMENTS)));
 
 			} while (c.moveToNext());
 		}
@@ -306,7 +301,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_EVENT_DATE, event.geteventdate());
 		values.put(KEY_EVENT_TIME, event.geteventtime());
 		values.put(KEY_DESCRIPTION, event.getdescription());
-		values.put(KEY_EVENT_DOCUMENTS, event.geteventdocuments());
 
 		// updating row
 		return db.update(TABLE_EVENT, values, KEY_EVENT_NAME + " = ?",
@@ -330,7 +324,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_CLASS_LOCATION, class_name.getclasslocation());
 		values.put(KEY_CLASS_TIME, class_name.getclasstime());
 		values.put(KEY_DAYS, class_name.getclassdays());
-		values.put(KEY_CLASS_DOCUMENTS, class_name.getclassdocuments());
 
 		long class_id = db.insert(TABLE_CLASS, null, values);
 
@@ -386,8 +379,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 				nc.setprofessor(c.getString(c.getColumnIndex(KEY_PROFESSOR)));
 				nc.setclasstime(c.getString(c.getColumnIndex(KEY_CLASS_TIME)));
 				nc.setclassdays(c.getString(c.getColumnIndex(KEY_DAYS)));
-				nc.setclassdocuments(c.getString(c
-						.getColumnIndex(KEY_CLASS_DOCUMENTS)));
 
 				// adding to class list
 				class_names.add(nc);
@@ -412,40 +403,15 @@ public class SQLHandler extends SQLiteOpenHelper {
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_PROFESSOR)));
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_TIME)));
 				sqlClass.add(c.getString(c.getColumnIndex(KEY_DAYS)));
-				sqlClass.add(c.getString(c.getColumnIndex(KEY_CLASS_DOCUMENTS)));
 				// adding to class list
 			} while (c.moveToNext());
 		}
 		return sqlClass;
 	}
 
-	// put document in Database
-	public void addDocument(String class_id, String doc_name) {
+	
 
-		SQLiteDatabase db = this.getReadableDatabase();
-		ContentValues values = new ContentValues();
-		values.put(KEY_CLASS_DOCUMENTS, doc_name);
-
-		// updating row
-		db.update(TABLE_CLASS, values, KEY_CLASSID + " = ?",
-				new String[] { class_id });
-	}
-
-	// get documents from class
-
-	public List<String> getDocuments(long class_id) {
-		List<String> classDocs = new ArrayList<String>();
-		String Query = "SELECT documents FROM " + TABLE_CLASS + " WHERE "
-				+ KEY_CLASSID + " = '" + class_id + "'";
-
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery(Query, null);
-		if (c.moveToFirst()) {
-			classDocs.add(c.getString(c.getColumnIndex(KEY_CLASS_DOCUMENTS)));
-		}
-		return classDocs;
-
-	}
+	
 
 	// update class
 	public int updateClass(SQLClass class_name) {
@@ -457,7 +423,6 @@ public class SQLHandler extends SQLiteOpenHelper {
 		values.put(KEY_PROFESSOR, class_name.getprofessor());
 		values.put(KEY_CLASS_TIME, class_name.getclasstime());
 		values.put(KEY_DAYS, class_name.getclassdays());
-		values.put(KEY_CLASS_DOCUMENTS, class_name.getclassdocuments());
 
 		// updating row
 		return db.update(TABLE_CLASS, values, KEY_CLASS_NAME + " = ?",
