@@ -34,7 +34,7 @@ public class ProfileCreatorFrag extends Fragment {
 				String email = etEmail.getText().toString();
 				String school = etSchool.getText().toString();
 
-				if (name.length() > 0 && email.length() > 0
+				if (name.length() > 0 && email.length() > 0 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 						&& school.length() > 0) {
 
 					SQLHandler db = new SQLHandler(getActivity()
@@ -64,6 +64,11 @@ public class ProfileCreatorFrag extends Fragment {
 					}
 					if (email.length() == 0) {
 						etEmail.setHint("ENTER AN EMAIL");
+						etEmail.setHintTextColor(-65536);
+					}
+					if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+						etEmail.setText("");
+						etEmail.setHint("ENTER A VALID EMAIL");
 						etEmail.setHintTextColor(-65536);
 					}
 					if (school.length() == 0) {
